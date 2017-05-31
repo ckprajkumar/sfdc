@@ -6,7 +6,7 @@ This will help in identifying what belongs to specific application and helps in 
 
 | Type of development | Format |Example |
 | ------ | ------ | ------ |
-|SFA_CalculateEstimate_BL |SFA_<classname>_<Type>|SFA_CalculateEstimate_BL|
+| SFA_CalculateEstimate_BL | SFA_<classname>_<Type> | SFA_CalculateEstimate_BL |
 |SFA_CalculatEestimate_VFC|SFA_<classname>_VFC|SFA_CalculatEestimate_VFC|
 |SFA_CalculatEestimate_VFC_Test|SFA_<classnametobetested>_<VFC>_Test|SFA_CalculatEestimate_VFC_Test|
 |SFA_CalculateEstimate_VFP|SFA_<pagename>_VFP|SFA_CalculateEstimate_VFP|
