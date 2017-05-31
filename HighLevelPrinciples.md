@@ -14,4 +14,4 @@
 
 The Platform Owner retains ultimate control of the standards, and may overrule this document on request in specific cases. This can be requested by projects through Customer Salesforce IT team for the Salesforce platform.
 
-See more on [General Naming Convention.md]()
+See more on [ProjectSpecificNamingConvention.md](https://github.com/ckprajkumar/sfdc/blob/master/ProjectSpecificNamingConvention.md)
