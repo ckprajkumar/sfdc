@@ -22,4 +22,6 @@ computeAverage(); // NOT: compAvg();
 ```sh
 boolean isError; // NOT: isNoError
 ```
+See more on [GeneralNamingConvention.md](https://github.com/ckprajkumar/sfdc/blob/master/GeneralNamingConvention.md)
+
 See more on [ProjectSpecificNamingConvention.md](https://github.com/ckprajkumar/sfdc/blob/master/ProjectSpecificNamingConvention.md)
