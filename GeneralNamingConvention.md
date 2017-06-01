@@ -22,4 +22,4 @@ computeAverage(); // NOT: compAvg();
 ```sh
 boolean isError; // NOT: isNoError
 ```
-See more on ProjectSpecificNamingConvention.md
+See more on [ProjectSpecificNamingConvention.md](https://github.com/ckprajkumar/sfdc/blob/master/ProjectSpecificNamingConvention.md)
