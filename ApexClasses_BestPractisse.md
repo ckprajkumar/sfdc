@@ -163,5 +163,56 @@ Here is a list of governor limits specific to the @future annotation:
 
 It's important to make sure that the asynchronous methods are invoked in an efficient manner and that the code in the methods is efficient. In the following example, the Apex trigger invokes an asynchronous method for each Account record it wants to process: 
 
+    {
+     for(Account a: Trigger.new){
+    // Invoke the @future method for each Account
+    // This is inefficient and will easily exceed the governor limit of 
+    // at most 10 @future invocation per Apex transaction
+    asyncApex.processAccount((String)a.id);
+      }     
+    }
+Here is the Apex class that defines the @future method:
+global class asyncApex {
+
+    @future 
+     public static void processAccount(Id accountId) {
+       List<Contact> contacts = [select id, salutation, firstname, lastname, email 
+                                 from Contact where accountId = :accountId];
+ 	   
+       for(Contact c: contacts){
+ 	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' +                      c.lastname +']');
+ 	   c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
+       }
+        update contacts;        
+     }   
+    }
+
+Since the @future method is invoked within for loop, it will be called N-times (depending on the number of accounts being processed). So if there are more than ten accounts, this code will throw an exception for exceeding a governor limit of only ten @future invocations per Apex transaction. 
+
+Instead, the @future method should be invoked with a batch of records so that it is only invoked once for all records it needs to process: 
+
+    {
+    //By passing the @future method a set of Ids, it only needs to be
+    //invoked once to handle all of the data. 
+    asyncApex.processAccount(Trigger.newMap.keySet());
+    }
+
+And now the @future method is designed to receive a set of records:
+
+    global class asyncApex {
+ 
+     @future 
+    public static void processAccount(Set<Id> accountIds) {
+       List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact                               where accountId IN :accountIds];
+       for(Contact c: contacts){
+ 	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' +                             c.lastname +']');
+ 	   c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
+       }
+       update contacts;
+     }
+    }
+
+Notice the minor changes to the code to handle a batch of records. It doesn't take a whole lot of code to handle a set of records as compared to a single record, but it's a critical design principle that should persist across all of your Apex code - regardless if it's executing synchronously or asynchronously. 
+
 
 
