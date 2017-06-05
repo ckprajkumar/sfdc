@@ -55,3 +55,9 @@ Incorrect:
 Integer a, b, c;
 c = a+b;
 c ++;
+### Blank Lines
+- Blank line must be added before starting and SFAter ending a code block (block of code is code enclosed within {} braces), unless it is a } else if { condition, and in such case, there must not be any blank line.
+- There must be maximum one or two blank lines.
+###	Line Wrapping
+- All code lines must be wrapped to around 100 characters. This is a guideline so even if it exceeds by +/- 10 characters, it must be fine.
+
