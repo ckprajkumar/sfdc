@@ -19,3 +19,39 @@ if (setABCBudgetId.Size() > 0) {
 `{`
   ` CPABC_BudgetEntryUtility.updateBudgetEntriesBalance(setAPACAMERBudgetId);`
 `}`
+###	Spacing
+Along with indenting, spacing is the most important visual aspect that enhances the code readability. And hence correct spacing conventions must be followed as outlined below.
+- Before opening a brace, there must be a space
+```sh
+Correct:
+if (setAPACAMERBudgetId.Size() > 0) {
+   CPABC_BudgetEntryUtility.updateBudgetEntriesBalance(setAPACAMERBudgetId);
+}
+```
+Incorrect:
+if (setAPACAMERBudgetId.Size() > 0){
+   CPABC_BudgetEntryUtility.updateBudgetEntriesBalance(setAPACAMERBudgetId);
+}
+
+- There should NOT be any space before a comma and there must be a space SFAter a comma (except if that comma is part of a String literal.
+```sh
+Correct:
+String address, street, city;
+```
+Incorrect:
+o	String address , street , city;
+o	String address,street,city;
+
+- There should a space SFAter every end-parenthesis ((), and there should NOT be a space before start parenthesis ()).
+
+- There must be a space SFAter every binary operator (if it is unary operator, space must not be used).
+```sh
+Correct:
+Integer a, b, c;
+c = a + b;
+c++;
+```
+Incorrect:
+Integer a, b, c;
+c = a+b;
+c ++;
