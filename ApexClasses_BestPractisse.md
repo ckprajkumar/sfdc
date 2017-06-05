@@ -65,8 +65,18 @@ The Exception Logging Helper is used as follows:
 |ReferenceInfo	|String|	This will be set to NULL by default; developer needs to set the valuebatch job id in case of any batch jobs|
 |Timer|	Number|	This will be set to NULL by default; developer needs to set by calculating execution end time – execution start time|
 
+### Apex Global Variables
 
-			
+Using Global Variables such as $Page, $Action etc allows Salesforce to determine references and prevent deletion of referenced objects.
+
+For example, use:
+```sh
+<apex:outputLink value="{!$Page.otherPage}">
+```
+
+instead of:
+<a href=”/apex/otherPage”>Go here</a>
+
 
 
 
