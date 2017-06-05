@@ -6,3 +6,5 @@ Apex is designed mostly based on the Java language conventions and hence we shou
 Code must be indented using a tab character and where applicable tab must be set as 4 space width.
 
 ### Bracing
+Brace is an either {or }.
+Start Brace must be in the same line as the statement and end brace must be on its own line, completing the indentation
