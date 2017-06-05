@@ -202,7 +202,7 @@ And now the @future method is designed to receive a set of records:
     global class asyncApex {
  
      @future 
-    public static void processAccount(Set<Id> accountIds) {
+       public static void processAccount(Set<Id> accountIds) {
        List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact                               where accountId IN :accountIds];
        for(Contact c: contacts){
  	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' +                             c.lastname +']');
