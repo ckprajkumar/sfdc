@@ -109,9 +109,7 @@ if(acct.BillingState=='CA')
 {
 System.debug(‘do something’);
 }
-
 }
-
 }
 
 Instead do:
@@ -134,3 +132,23 @@ System.debug(‘do something');
 }
 }
 ```
+### Querying Large Data sets
+
+If returning a large set of queries causes you to exceed your heap limit, then a SOQL query for loop must be used instead. It can process multiple batches of records through the use of internal calls to query and queryMore.
+
+Instead of:
+
+Account[] accts = [SELECT id FROM account]; For (Account acct : accts)
+{
+//Do Something
+}
+
+Use:
+```sh
+for (List<Account> acct : [SELECT id, name FROM account])
+{
+ //Do Something
+}
+```
+
+
