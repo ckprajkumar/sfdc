@@ -48,5 +48,26 @@ return "A. O. K."; // return not recommended here
 5.	Page based exceptions should be added to ApexPages.Messages 
 6.	In triggers, exceptions should use addError() method to prevent committing 
 7.	Do not catch NullPointerExceptions – identify and resolve the core issue. 
+### ExceptionLoggingHelper
+
+The Exception Logging Helper is used as follows:
+- ExceptionLoggingHelper.createErrorLog(User, Class Name, Method Name, Message,EXECEPTION OBJECT, DebugLevel, IntegrationPayload,  ReferenceInfo, Timer);
+
+| Field | Type | Description|
+| ------ | ------ |-------|
+| User | Id |Current User|
+|Class Name|	String|		Class name where the exception occurred|
+|Method Name|String		|Method name where the exception occurred
+|Message|	String	|	System message or custom message
+|Exception|	String	|	Exception Object (to be kept for future changes)
+|DebugLevel|	String|		This will be set to ERROR by default; developer can set it either of Error, Info, Warning or Debug|
+|Integration Payload|	String|		This will be set to NULL by default; developer needs to set the value in case of integration exception
+
+
+			
+
+
+
+
 
 
