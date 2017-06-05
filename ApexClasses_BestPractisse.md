@@ -214,5 +214,69 @@ And now the @future method is designed to receive a set of records:
 
 Notice the minor changes to the code to handle a batch of records. It doesn't take a whole lot of code to handle a set of records as compared to a single record, but it's a critical design principle that should persist across all of your Apex code - regardless if it's executing synchronously or asynchronously. 
 
+### Writing Test Methods to Verify Large Datasets
+
+Since Apex code executes in bulk, it is essential to have test scenarios to verify that the Apex being tested is designed to handle large datasets and not just single records. To elaborate, an Apex trigger can be invoked either by a data operation from the user interface or by a data operation from the Force.com Web Services API. The API can send multiple records per batch, leading to the trigger being invoked with several records. Therefore, it is key to have test methods that verify that all Apex code is properly designed to handle larger datasets and that it does not exceed governor limits. 
+
+The example below shows you a poorly written trigger that does not handle bulk properly and therefore hits a governor limit. Later, the trigger is revised to properly handle bulk datasets. 
+
+Here is the poorly written contact trigger. For each contact, the trigger performs a SOQL query to retrieve the related account. The invalid part of this trigger is that the SOQL query is within the for loop and therefore will throw a governor limit exception if more than 100 contacts are inserted/updated. 
+
+{  
+   for(Contact ct: Trigger.new){	
+   	   Account acct = [select id, name from Account where Id=:ct.AccountId];
+   	   if(acct.BillingState=='CA'){
+   	      System.debug('found a contact related to an account in california...');
+   	      ct.email = 'test_email@testing.com';
+   	      //Apply more logic here....
+   	   }
+   } 
+}
+
+Here is the test method that tests if this trigger properly handles volume datasets: 
+
+public class sampleTestMethodCls {
+
+	static testMethod void testAccountTrigger(){
+		
+		//First, prepare 200 contacts for the test data
+		Account acct = new Account(name='test account');
+		insert acct;
+		
+		Contact[] contactsToCreate = new Contact[]{};
+		for(Integer x=0; x<200;x++){
+		    Contact ct = new Contact(AccountId=acct.Id,lastname='test');
+		    contactsToCreate.add(ct);
+		}
+		
+		//Now insert data causing an contact trigger to fire. 
+		Test.startTest();
+		insert contactsToCreate;
+		Test.stopTest();	
+	}}
+
+This test method creates an array of 200 contacts and inserts them. The insert will, in turn, cause the trigger to fire. When this test method is executed, a System.Exception will be thrown when it hits a governor limit. Since the trigger shown above executes a SOQL query for each contact in the batch, this test method throws the exception 'Too many SOQL queries: 101'. A trigger can only execute at most 20 queries. 
+
+Now let's correct the trigger to properly handle bulk operations. The key to fixing this trigger is to get the SOQL query outside the for loop and only do one SOQL Query:
+
+```sh
+{
+   Set<Id> accountIds = new Set<Id>();
+   for(Contact ct: Trigger.new)
+   	   accountIds.add(ct.AccountId);
+   //Do SOQL Query	   
+   Map<Id, Account> accounts = new Map<Id, Account>(
+        [select id, name, billingState from Account where id in :accountIds]); 
+   for(Contact ct: Trigger.new){
+       if(accounts.get(ct.AccountId).BillingState=='CA'){
+   	   	   System.debug('found a contact related to an account in california...');
+   	   	   ct.email = 'test_email@testing.com';
+   	   	   //Apply more logic here....
+   	   }
+   } 
+}
+```
+Note how the SOQL query retrieving the accounts is now done once only. If you re-run the test method shown above, it will now execute successfully with no errors and 100% code coverage.
+
 
 
