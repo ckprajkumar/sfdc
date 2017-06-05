@@ -150,5 +150,18 @@ for (List<Account> acct : [SELECT id, name FROM account])
  //Do Something
 }
 ```
+### Use @future appropriately
+It is critical to write your Apex code to efficiently handle bulk or many records at a time. This is also true for asynchronous Apex methods (those annotated with the @future keyword). Even though Apex written within an asynchronous method gets its own independent set of higher governor limits, it still has governor limits. 
+
+Additionally, no more than ten @future methods can be invoked within a single Apex transaction. 
+The parameters specified must be primitive data types, arrays of primitive data types, or collections of primitive data types.
+
+Methods with the future annotation cannot take sObjects or objects as arguments. Methods with the future annotation cannot be used in Visual force controllers in either getMethodName or setMethodName methods, nor in the constructor.
+Here is a list of governor limits specific to the @future annotation: 
+1.	No more than 10 method calls per Apex invocation 
+2.	No more than 200 method calls per Salesforce license per 24 hours 
+
+It's important to make sure that the asynchronous methods are invoked in an efficient manner and that the code in the methods is efficient. In the following example, the Apex trigger invokes an asynchronous method for each Account record it wants to process: 
+
 
 
