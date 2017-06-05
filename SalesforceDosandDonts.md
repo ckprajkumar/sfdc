@@ -29,6 +29,7 @@
 |Apex Trigger|Write Trigger Code in Classes Trigger code written directly into the trigger element quickly becomes difficult to maintain when the amount of code exceeds 20 lines of script.|High|
 |Apex Trigger|Trigger Logic At the beginning of all trigger code there should be a line that checks the custom setting to see if it should proceed for the user.|High|
 
+Images
 
 #### APEX Trigger - Only Have One Trigger Per Object
 
@@ -79,6 +80,6 @@ trigger accountTestTrggr on Account (before insert, before update) {
 ```
 ### APEX Trigger - Write Trigger Code in Classes
 Trigger code written directly into the trigger element quickly becomes difficult to maintain when the amount of code exceeds 20 lines of script.
-
+public class OpportuntiyTriggerHandlerNew {      public class OpportuntiyTriggerHandlerNew {        List<Opportunity> oppList = new List<Opportunity>();    List<Opportunity> OpptyList = new List<Opportunity>();    List<Opportunity> OppProducerList = new List<Opportunity>();    public static Boolean isFirstTime = true;    Map<Id,Profile> chatterEnabledProfileMap = new Map<Id,Profile>();    List<PermissionSetAssignment> chatterPermAssgmtList = new List<PermissionSetAssignment>();        static List<Messaging.SingleEmailMessage> allMails = new List<Messaging.SingleEmailMessage>();    static List<ConnectApi.BatchInput> underwriterBatchFeeds = new List<ConnectApi.BatchInput>();    static List<ConnectApi.BatchInput> saleSupportBatchFeeds = new List<ConnectApi.BatchInput>();        //get the settings instance    OB_TriggerSettings__c settings = OB_TriggerSettings__c.getInstance();
 ## APEX Trigger - Write Trigger Code in Classes…. continued 
 
