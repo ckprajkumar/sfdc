@@ -61,7 +61,9 @@ The Exception Logging Helper is used as follows:
 |Message|	String	|	System message or custom message
 |Exception|	String	|	Exception Object (to be kept for future changes)
 |DebugLevel|	String|		This will be set to ERROR by default; developer can set it either of Error, Info, Warning or Debug|
-|Integration Payload|	String|		This will be set to NULL by default; developer needs to set the value in case of integration exception
+|Integration Payload|	String|		This will be set to NULL by default; developer needs to set the value in case of integration exception|
+|ReferenceInfo	|String|	This will be set to NULL by default; developer needs to set the valuebatch job id in case of any batch jobs|
+|Timer|	Number|	This will be set to NULL by default; developer needs to set by calculating execution end time – execution start time|
 
 
 			
