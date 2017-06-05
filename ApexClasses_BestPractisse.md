@@ -76,10 +76,61 @@ For example, use:
 
 instead of:
 `<a href=”/apex/otherPage”>Go here</a>`
+### SOQL inside loops
 
+There is a Governor limit to the number of SOQL queries in an execution context. Ensure that SOQL is executed outside a loop as much as possible to prevent this limit being breached:
 
+Do not do:
 
+for (Account a : [SELECT Id, Name FROM Account WHERE Name LIKE 'Acme%'])
+{
+// Your code without DML statements here a.Name=’new name’;
+update a;
+}
 
+instead do:
+```sh
+List<Account> accts : [SELECT Id, Name FROM Account WHERE Name LIKE 'Acme%'];
+For(Account a: accts)
+{
+a.name=’new name’;
+}
+update accts;
+}
+```
+Similarly, design triggers to support bulk invocation.  Do not do:
 
+trigger contactTest on Contact (before insert, before update)
+{
+for(Contact ct: Trigger.new)
+{
+Account acct = [select id, name from Account where Id=:ct.AccountId];
+if(acct.BillingState=='CA')
+{
+System.debug(‘do something’);
+}
 
+}
 
+}
+
+Instead do:
+```sh
+trigger contactTest on Contact (before insert, before update)
+{
+Set<Id> accountIds = new Set<Id>(); for(Contact ct: Trigger.new)
+{
+accountIds.add(ct.AccountId);
+}
+//Do SOQL Query outside the iterator
+Map<Id, Account> accounts = new Map<Id, Account>(
+[select id, name, billingState from Account where id in :accountIds]);
+for(Contact ct: Trigger.new)
+{
+if(accounts.get(ct.AccountId).BillingState=='CA')
+{
+System.debug(‘do something');
+}
+}
+}
+```
