@@ -75,7 +75,7 @@ For example, use:
 ```
 
 instead of:
-<a href=”/apex/otherPage”>Go here</a>
+`<a href=”/apex/otherPage”>Go here</a>`
 
 
 
