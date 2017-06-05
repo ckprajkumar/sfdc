@@ -278,5 +278,39 @@ Now let's correct the trigger to properly handle bulk operations. The key to fix
 ```
 Note how the SOQL query retrieving the accounts is now done once only. If you re-run the test method shown above, it will now execute successfully with no errors and 100% code coverage.
 
+### Avoid Hard Coding IDs
+When deploying Apex code between sandbox and production environments, or installing Force.com AppExchange packages, it is essential to avoid hardcoding IDs in the Apex code. By doing so, if the record IDs change between environments, the logic can dynamically identify the proper data to operate against and not fail. 
+Here is a hard coded sample of the record type IDs that are used in an conditional statement. This will work fine in the specific environment in which the code was developed, but if this code were to be installed in a separate org (ie. as part of an AppExchange package), there is no guarantee that the record type identifiers will be the same. 
+
+for(Account a: Trigger.new){	 
+   //Error - hardcoded the record type id
+   if(a.RecordTypeId=='012500000009WAr'){     	  	
+      //do some logic here.....
+   }else if(a.RecordTypeId=='0123000000095Km'){
+      //do some logic here for a different record type...
+   }
+}
+
+Now, to properly handle the dynamic nature of the record type IDs, the following example queries for the record types in the code, stores the dataset in a map collection for easy retrieval, and ultimately avoids any hard coding. 
 
 
+    //Query for the Account record types
+     List<RecordType> rtypes = [Select Name, Id From RecordType 
+                  where sObjectType='Account' and isActive=true];
+                  //Create a map between the Record Type Name and Id for easy retrieval
+     Map<String,String> accountRecordTypes = new Map<String,String>{};
+     for(RecordType rt: rtypes)
+        accountRecordTypes.put(rt.Name,rt.Id);
+   
+      for(Account a: Trigger.new){
+     	 
+     	  //Use the Map collection to dynamically retrieve the Record Type Id
+     	  //Avoid hardcoding Ids in the Apex code
+     	  if(a.RecordTypeId==accountRecordTypes.get('Healthcare')){     	  	
+     	  	 //do some logic here.....
+     	  }else if(a.RecordTypeId==accountRecordTypes.get('High Tech')){
+     	  	 //do some logic here for a different record type...
+     	  }   	 
+     }
+
+By ensuring no IDs are stored in the Apex code, you are making the code much more dynamic and flexible - and ensuring that it can be deployed safely to different environments
