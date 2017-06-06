@@ -40,39 +40,17 @@
 38|	Apex Class: Limit Length of WHERE Clause and no query without WHERE clause.			
 39	|Apex Class: Don’t send parameters  to a method if they can be created within that method			
 40|	Apex Class: Reduce number of statements by combining multiple statements  where possible			
-41	Apex Class: Using keyset to iterate			
-42	"Apex Class: SOQL Injection may cause, wrong approach is as below:
-public PageReference query() {
-String qryString = 'SELECT Id FROM Contact WHERE ' + '(IsDeleted = false and Name like \'%' + name + '%\')';
-queryResult = Database.query(qryString) ;
-return null;
-}
-Right approach is as below:
-public PageReference query() {
-String queryName = '%' + name + '%'
-queryResult = [SELECT Id FROM Contact WHERE (IsDeleted = false and Name like :queryName)];
-return null;
-}"			
-43	Apex Class: Is there any empty Constructor in the class?			
-44	Apex Class: For a List, is the isEmpty() check present instead of size()? This will improve the performance.			
-45	Apex Class: Is there different method returning the same value?			
-46	Apex Class: Use ".equalsIgnoreCase' instead of "==" when comparing strings.			
-47	Apex Class: In If statements, when comparing against a constant, put it first so that it is impossible for a null exception to occur.			
-48	"Apex Class: Use isNotBlank() method for checking strings, rather than Null and ' '.
-Use isBlank method on the string instead of comparing with null and empty string. isBlank method check for both the options."			
-49	Apex Class: No need to check for "== true" for boolean variables.			
-50	Apex Class: Instead of specifying all the fields in the query, use schema methods to iterate and build query string. In future even there is new field is added the code will be handled automatically.			
-51	"Apex Class: for(MessageHeader__c messageObj:messageSch)
-{
- listIdSet.add(messageObj.List__c);
-}
-
-No need of 'for loop' here to convert list to set. Use Set.addAll(List) method."			
-52	Limit line length to 125 characters.			
-53	"Inline Comments for Class and Methods:
-
-// Your Comments Note – For comments regarding a particular line; Mention Release Specific details in Inline comment wherever required
- OR
-/* Your Comments*/ Note – For comments related to a block; Mention Release Specific details in Inline comment wherever required
-"			
+41|	Apex Class: Using keyset to iterate			
+42|	"Apex Class: SOQL Injection may cause, wrong approach is as below:public PageReference query() {String qryString = 'SELECT Id FROM Contact WHERE ' + '(IsDeleted = false and Name like \'%' + name + '%\')';queryResult = Database.query(qryString) ;return null;}Right approach is as below:publicPageReference query() {String queryName = '%' + name + '%'queryResult = [SELECT Id FROM Contact WHERE (IsDeleted = false and Name like :queryName)];return null;}"			
+43|	Apex Class: Is there any empty Constructor in the class?			
+44|	Apex Class: For a List, is the isEmpty() check present instead of size()? This will improve the performance.			
+45|	Apex Class: Is there different method returning the same value?			
+46|	Apex Class: Use ".equalsIgnoreCase' instead of "==" when comparing strings.			
+47|	Apex Class: In If statements, when comparing against a constant, put it first so that it is impossible for a null exception to occur.			
+48	|"Apex Class: Use isNotBlank() method for checking strings, rather than Null and ' '.Use isBlank method on the string instead of comparing with null and empty string. isBlank method check for both the options."			
+49|	Apex Class: No need to check for "== true" for boolean variables.			
+50|	Apex Class: Instead of specifying all the fields in the query, use schema methods to iterate and build query string. In future even there is new field is added the code will be handled automatically.			
+51|	"Apex Class: for(MessageHeader__c messageObj:messageSch){ listIdSet.add(messageObj.List__c);}No need of 'for loop' here to convert list to set. Use Set.addAll(List) method."			
+52|	Limit line length to 125 characters.			
+53|	"Inline Comments for Class and Methods:// Your Comments Note – For comments regarding a particular line; Mention Release Specific details in Inline comment wherever requiredOR/* Your Comments*/ Note – For comments related to a block; Mention Release Specific details in Inline comment wherever required"			
 
