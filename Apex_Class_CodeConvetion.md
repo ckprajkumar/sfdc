@@ -1,8 +1,8 @@
 # Code Convention
 ### General Standards
 
-•	Declare all variables at the beginning of each class. 
-•	All instance variables must be declared either private or protected. 
+- Declare all variables at the beginning of each class. 
+- All instance variables must be declared either private or protected. 
 •	A class must have limited public variables except 'final' or 'static final'. Try to avoid public variables where possible 
 •	To convert a primitive type to String use String.valueOf() instead of var + "" 
 •	Avoid any type of hard coding in the code. Use Custom Labels or static Apex Classes to drive any configuration related values 
