@@ -38,6 +38,7 @@ A class with too many methods is probably a good suspect for refactoring, in ord
 ### Avoiding Non-Consecutive Heading Tags
 
 Heading tags are used by search engines and screen reader software to construct an outline of the page. Starting at < h1 > and not skipping any level eases this automatic construction.
+
 Upon review the level in the scanning tool has been changed from MAJOR to Info.
 
 ###	Unused Formal Parameter
