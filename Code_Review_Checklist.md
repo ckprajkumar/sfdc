@@ -24,7 +24,7 @@
 21	|Apex Class: Use the Page.getUrl() method to get the URL/URI for a Salesforce page.			
 22|	Apex Class: When comparing a String literal to a String object, always use the syntax 'String literal'.equals(stringObj).			
 23|	Apex Class: When writing a VF Controller, make sure to add 'with sharing' in the class declaration. This will help in controlling the code coverage not going down for different user profiles.			
-24|	"Apex Class: You must provide a class header, similar to the following, at the start of every class. The header must use the Javadoc syntax.Example of Class Header/* @Author <Author Name>@name <Class name> @CreateDate <Date>@Description <purpose of the class @Version <1.0>@reference<Referenced program names> */"			
+24|	"Apex Class: You must provide a class header, similar to the following, at the start of every class.<br/>  The header must use the Javadoc syntax.<br/> <br/> Example of Class Header<br/> /* <br/> @Author <Author Name><br/> @name <Class name><br/>  @CreateDate <Date><br/> @Description <purpose of the class<br/>  @Version <1.0><br/> @reference<Referenced program names><br/>  */"			
 25|	"Apex Class: You must provide a method header, similar to the following, at the start of every public and protected method. Example of Method Header/***  Description of the purpose of the classthe method.  *  @name <method-name>*  @param <parameter-name> <description>*  @return <parameter> - <Description about the return parameter>*  @throws exception-<exception description>*/"			
 26|	Are System.debug statements removed?			
 27|	Apex Class: Has the unnecessary/commented code removed?			
