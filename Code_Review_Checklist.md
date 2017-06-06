@@ -75,14 +75,7 @@
 14|	Trigger: Implement SaveResults checks in all trigger methods			
 15|	Trigger: Handling of Errors in "after" trigger			
 16|	Trigger:You must write triggers to support bulk operations (i.e., you must bulkify triggers) of up to 200 records for each call.			
-17|	"Trigger: Trigger class header comment should be in below format: <br/>/** 
-   <br/>* Author: cognizant Team
- <br/>  * Description: <Trigger Description>
- <br/>  * Date Created: <Date the Trigger was created> 
- <br/>  * Version: <version Number> Note – It should start from 0.1 and increment every time we are 
-<br/>   *    making changes to the class
- <br/>  */
-           "			
+17|	"Trigger: Trigger class header comment should be in below format: <br/>/** <br/>* Author: cognizant Team<br/>  * Description: <Trigger Description><br/>  * Date Created: <Date the Trigger was created> <br/>  * Version: <version Number> Note – It should start from 0.1 and increment every time we are<br/>   *    making changes to the class<br/>  */ "			
 
 
 
