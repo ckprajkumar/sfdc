@@ -38,19 +38,16 @@ A class with too many methods is probably a good suspect for refactoring, in ord
 ### Avoiding Non-Consecutive Heading Tags
 
 Heading tags are used by search engines and screen reader software to construct an outline of the page. Starting at < h1 > and not skipping any level eases this automatic construction.
-
 Upon review the level in the scanning tool has been changed from MAJOR to Info.
 
 ###	Unused Formal Parameter
 
 Avoid passing parameters to methods or constructors and then not using those parameters.
-
 Upon review the level in the scanning tool has been changed from MAJOR to Info.
 
 ###   NPath (Cyclomatic) Complexity
 
 The NPath complexity of a method is the number of acyclic execution paths through that method. A threshold of 200 is generally considered where measures should be taken to reduce complexity. A high value makes testing and maintenance harder so code should be refactored if the complexity level is too high.
-
 Upon review, the level in the scanning tool has been changed from the default of 200 to the new value of 300.
 
 ###  Test Code Coverage
