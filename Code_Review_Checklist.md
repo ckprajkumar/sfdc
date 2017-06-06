@@ -175,6 +175,16 @@
 13|	Security: Session ID should always be encrypted in transmission. Session ID should not be sent to third parties. 			
 14|	"Security: Validate that the connection is being requested from a valid Salesforce server. Below is the regex to validate legitimate SFDC SOAP servers: https://[^/?]+\\.(sales\|visual\\.)force\\.com/services/(S\|\s)(O\|o)(A\|a)(P\|p)/(u\|c)/.*"			
 15|	Limit line length to 125 characters.			
+# Integration
+|#|Code Review Condition|Validated (Y/N)|	Reviewer Comments|	Remarks|
+|-|----|---|---|--|
+1|	Integration Error Handling: Custom code calling web services should catch SOAP faults and log exceptions using LoggingService.logServiceException.			
+2|	Integration: At runtime, use the values from sfDomain to override the values from the WSDL.			
+3|	Integration: Externalize all domain names used for integration using a common custom settings field named sfDomain			
+4|	Integration: Externalize all WSRR API keys using a common custom settings field named sfApiKey.			
+5|	Integration: Use custom settings for environment specific or global variables.The Custom Setting Definition to be referenced per environment must be sfEnvVars.			
+6|	Integration: When interacting with existing Client services, populate the <callingArea> attribute on the interface with the text value SALESFORCE.COM.			
+7|	Integration: There should always be a separate method for parsing the response of a web service call. One benefit of this is that it will help in writing test methods for code coverage and debugging the code when required.			
 
 
 
