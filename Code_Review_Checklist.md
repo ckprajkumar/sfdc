@@ -143,6 +143,20 @@
 23|	Test Class: Batch classes should test at least for 200 records in the test class itself.
 24|	Test Class: Test Class required for configuration components namely Validation rules and Workflow rules.
 
+# Error Handling
+|#|Code Review Condition|Validated (Y/N)|Reviewer Comments|	Remarks|
+|--|--|--|--|---|
+1|	Error Handling Info: “unhandled” exceptions, thrown within the SFDC platform must use the custom Apex logging class to log the exception.
+2|	Error Handling: Apex controllers for Visualforce pages, handle all possible exceptions and return it to the current page reference via ApexPages.addMessage() method.
+3|	"Error Handling: Code like this may cause the error log to get rolled back if the exception goes unhandled (applicable for VisualForce Controller or Apex Class).  Avoid this:<br/> <br/>try {<br/>// Perform some function<br/>} catch (Exception e) {<br/>LoggerService.logHandledException(e, …);<br/>throw e;<br/>}"
+4	|"Error Handling: Instead, error logging should happen at the outer most layer (Entry Method) possible (applicable for VisualForce Controller or Apex Class)<br/> <br/>Savepoint outerSavepoint = Database.setSavepoint();<br/>try {<br/>// Perform some function<br/>} catch (Exception e) {<br/>Database.rollback(outerSavepoint);<br/>LoggerService.logHandledException(e, …);  <br/>// Notify user of error here<br/>}"
+5|	Error Handling: If an exception is handled in a try-catch block, the exception information could be stored in a custom object and a meaningful message should be displayed on the UI. (Applicable for VF Page)
+6|	Error Handling: If exception is caught in a place other than a public method that is the entry point for a service call, then a more specific type of exception should be caught.
+7|	Error Handling: No empty catch blocks, if you need to catch an exception & not do anything after catching it, there must be a comment explaining why nothing is being done.
+8|	"Error Handling: No Nonpublic Personal Information (NPI) data is logged or included as part of any exception thrown across layers within the architecture.<br/><br/>Example of Including NPI Data (DO NOT USE THIS CODE)<br/>AnExceptionClass e = new AnExceptionClass('Error occurred on account with an SSN of ' + someSSN + '.');"
+9|	Error Handling: Provide exception handling (try-catch block) to handle direct DML (excluding database methods) exceptions.
+10|	Error Handling: Are null pointer checks (Isempty, Size()>0, Isnull, Isnotnull etc) made wherever necessary?
+11|	Custom code calling web services should catch SOAP faults and log exceptions using LoggingService.logServiceException
 
 
 
