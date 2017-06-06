@@ -157,7 +157,7 @@
 9|	Error Handling: Provide exception handling (try-catch block) to handle direct DML (excluding database methods) exceptions.
 10|	Error Handling: Are null pointer checks (Isempty, Size()>0, Isnull, Isnotnull etc) made wherever necessary?
 11|	Custom code calling web services should catch SOAP faults and log exceptions using LoggingService.logServiceException
-# General & Security $ Governor
+# General & Security & Governor
 |#|Code Review Condition|Validated (Y/N)|Reviewer Comments|	Remarks|
 |--|--|--|--|---|
 1|	General: Identify if anything can be put into a separate method so that the readability and useability are taken care.			
