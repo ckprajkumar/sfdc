@@ -83,7 +83,7 @@
 1|	VF Pages: A page name can consist of alphanumeric characters. It should be unique, beginning with an uppercase letter. It should not contain underscores and spaces. The words should be concatenated with Initial uppercase. Eg. ConfigureOpportunity.			
 2|	VF Pages: Allignments should be properly maintained with a tab indent of four spaces.			
 3|	VF Pages: Define a String constant (static final) for messages/text that are not within the System.Label collection and that are not defined as a Custom Setting. 			
-4|	"VF Pages: Every visual force page must have an <apex:messages /> tag for the display of custom validation and other error messages.<br/>Example of Visualforce Page Using apex:messages<br/><apex:page controller=""AccountWizardController"" > <br/> <apex:form > <br/>  <apex:pageBlock mode=""detail""><br/>   <apex:messages /><br/> <apex:pageBlockButtons><br/>   <apex:commandButton action=""{!sa}"" Value=""Sa""/><br/>  </apex:pageBlockButtons><br/>  </apex:pageBlock><br/>    </apex:form ><br/></apex:page>"			
+4|	"VF Pages: Every visual force page must have an <apex:messages /> tag for the display of custom validation and other error messages.<br/>Example of Visualforce Page Using apex:messages<br/><apex:page controller=""AccountWizardController"" > <br/> <apex:form > <br/>  <apex:pageBlock mode=""detail""><br/>   <apex:messages /><br/> <<apex:pageBlockButtons>><br/>   <apex:commandButton action=""{!sa}"" Value=""Sa""/><br/>  </apex:pageBlockButtons><br/>  </apex:pageBlock><br/>    </apex:form ><br/></apex:page>"			
 5|	VF Pages: Give a meaningful description for each Visualforce page			
 
 
