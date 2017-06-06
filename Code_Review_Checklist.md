@@ -52,5 +52,6 @@
 50|	Apex Class: Instead of specifying all the fields in the query, use schema methods to iterate and build query string. In future even there is new field is added the code will be handled automatically.			
 51|	"Apex Class: for(MessageHeader__c messageObj:messageSch){ listIdSet.add(messageObj.List__c);}No need of 'for loop' here to convert list to set. Use Set.addAll(List) method."			
 52|	Limit line length to 125 characters.			
-53|	"Inline Comments for Class and Methods:// Your Comments Note – For comments regarding a particular line; Mention Release Specific details in Inline comment wherever requiredOR/* Your Comments*/ Note – For comments related to a block; Mention Release Specific details in Inline comment wherever required"			
+53|	"Inline Comments for Class and Methods:// Your Comments Note – For comments regarding a particular line; Mention Release Specific details in Inline comment wherever requiredOR/* Your Comments*/ Note – For comments related to a block; Mention Release Specific details in Inline comment wherever required"	
+|s|xx<br/>vvv<h1> hhh|
 
