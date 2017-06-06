@@ -56,3 +56,33 @@
 53|	"Inline Comments for Class and Methods:<br/> // Your Comments Note – For comments regarding a particular line; Mention Release Specific details in Inline comment wherever required<br/> OR<br/> /* Your Comments*/ Note – For comments related to a block; Mention Release Specific details in Inline comment wherever required"	
 
 
+# Trigger
+|#|Code Review Condition|Validated (Y/N)|Reviewer Comments|	Remarks|
+|--|--|--|--|---|
+1|	Trigger Info: Triggers can be used to prevent DML operations from succeeding by calling the addError() method on a record or field. When used on Trigger.new records in insert and update triggers, and on Trigger.old records in delete triggers, the custom error message is displayed in the application interface and logged.			
+2|	Trigger: Minimize the amount of code within a trigger. To simplify testing and reuse, triggers should delegate to Apex classes that contain the actual execution logic. 			
+3|	Trigger: Prevent an infinite loop of execution of a trigger while creating triggers on parent and child objects, or updating same objects from the after update triggers. 			
+4|	Trigger: Provide a maximum of one trigger per event per object.			
+5|	Trigger: Provide bypass logic in each trigger. The bypass logic provides an easy way to bypass (temporarily disable) the trigger.			
+6|	Trigger: Set only a maximum of five save points in all contexts			
+7|	Trigger: Use static variables to pass data between triggers. 			
+8|	Trigger: User-defined methods in a trigger cannot be declared as static			
+9|	Trigger: When delegating from a trigger to a helper Apex class, pass only the appropriate records to the helper class for processing. 			
+10|	Trigger: Has the unnecessary/commented code removed?			
+11|	Trigger: Has the trigger logic been written in an Apex class and not within the trigger?			
+12|	Trigger: Triggers Should Include Try/Catches			
+13|	Trigger: Implement Check Limits in all trigger methods			
+14|	Trigger: Implement SaveResults checks in all trigger methods			
+15|	Trigger: Handling of Errors in "after" trigger			
+16	Trigger:You must write triggers to support bulk operations (i.e., you must bulkify triggers) of up to 200 records for each call.			
+17|	"Trigger: Trigger class header comment should be in below format: <br/>/** 
+   <br/>* Author: cognizant Team
+ <br/>  * Description: <Trigger Description>
+ <br/>  * Date Created: <Date the Trigger was created> 
+ <br/>  * Version: <version Number> Note – It should start from 0.1 and increment every time we are 
+<br/>   *    making changes to the class
+ <br/>  */
+           "			
+
+
+
