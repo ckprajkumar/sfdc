@@ -114,7 +114,34 @@
 2|	CSS: You must place the <apex:stylesheet> tag at the top of the Visualforce page, before any content that will use any styles within the stylesheet. 			
 3|	"Javascript: If there is a JavaScript with in a Visualforce page, put into a separate JavaScript file, as a static resource. Then from the Visualforce page, call the JavaScript .<br/><br/>Example of Including Static JavaScript Resource<br/><apex:includeScript value=""{!$Resource.MyJavascriptFile}""/>"			
 4|	Javascript: Is the <apex:includeScript> tag at the bottom of the Visualforce page, just before the </apex:page>.			
-5|	Javascript: You must use the $Component global variable to retrieve a Visualforce component’s DOM ID.			
+5|	Javascript: You must use the $Component global variable to retrieve a Visualforce component’s DOM ID.		
+# Test Class
+|#|Code Review Condition|Validated (Y/N)|Reviewer Comments|	Remarks|
+|--|--|--|--|---|
+1|	Test Class: A separate test class should be there for each Apex class.
+2|	Test Class: All the test data creation should be before Test.startTest(). 
+3|	Test Class: Assert statements for async call like batch classes, scheduler, future methods should be after the Test.stopTest().
+4|	Test Class: For conditional logic (including ternary operators), execute each branch of code logic.
+5|	Test Class: Must have at least 95% of your Apex code covered by unit tests to deploy your Apex code to production environments. Comments and System.debug() calls are not included in the Code coverage.
+6|	Test class: Test Apex class methods and Trigger using both valid and invalid inputs 
+7|	Test Class: Test classes follow naming convention <ClassName>_Test.
+8	|Test Class: Test classes should  cover bulk scenarios for all helper classes that are called from any trigger.
+9|	Test Class: Trigger test classes should  test the trigger’s bulk handling capability, using at least 200 records. 
+10|	Test Class: Use at least one System.assert(), System.assertEquals(), or System.assertNotEquals() within every test method. Make sure specific asserts been used in the program.
+11|	Test Class: Use the System.RunAs() method to test your application in different user contexts. Make sure to test with the right user apart from system admin.
+12	|Test Class: Write comments stating not only what is supposed to be tested, but also the assumptions the tester made about the data, the expected outcome, and so on.
+13	|Test Class: Has the unnecessary/commented code removed?
+14|	Test Class: Do the test classes use the utility methods to insert data on the fly including the Master table data. ?
+15|	"Test Class: You must provide a class header, similar to the following, at the start of every class. The header must use the Javadoc syntax.<br/>Example of Class Header<br/>/**<br/> @Author <Author Name><br/>@name <Class name><br/>@CreateDate <Date><br/>@Description <purpose of the class><br/> @Version <1.0><br/>@reference <Referenced program names><br/>*/"
+16|	"Test Class: You must provide a method header, similar to the following, at the start of every public and protected method. <br/><br/>Example of Method Header<br/>/**<br/>*  Description of the purpose of the classthe method. <br/>*  @name <method-name><br/>*  @param <parameter-name> <description><br/>*  @return <parameter> - <Description about the return parameter><br/>*  @throws exception-<exception description><br/>*  @see com.ac.sample.SuperObject#get<br/>*/"
+17|	Test Class: No hard coding present in test class except which are been used only within the test class and not with Org.
+18|	Test Class: Test class access specifier should be private and not public.
+19	|Test Class: Test class should have postive and negative scenarios should capture exact negative scenario and not generic.
+20|	Test Class: No need to insert the user, as it is used only for runAs(). Just define the user.
+21|	Test Class: Ensure that the user names are uniqe accross the organization accross all the test classes. Provide the user names very unique and specific to the test class instead of generic names.
+22|	Test Class: Multiple DML statements should be avoided instead use collection and use one DML statement.
+23|	Test Class: Batch classes should test at least for 200 records in the test class itself.
+24|	Test Class: Test Class required for configuration components namely Validation rules and Workflow rules.
 
 
 
