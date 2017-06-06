@@ -15,3 +15,10 @@ All standard Visualforce components, which start with <apex>, have anti-XSS filt
 ```
 By default, virtually all Visualforce tags escape the XSS-vulnerable characters. It is possible to disable this behavior by setting the optional attribute escape="false". This default behavior must not be disabled without CTO and Security Approval.
 
+### Programming Items Not Protected from XSS
+
+The following items do not have built-in XSS protections, so take extra care when using these tags and objects. This is because these items were intended to allow the developer to customize the page by inserting script commands. It does not makes sense to include anti-
+
+XSS filters on commands that are intentionally added to a page.
+
+##### Custom JavaScript
