@@ -157,7 +157,24 @@
 9|	Error Handling: Provide exception handling (try-catch block) to handle direct DML (excluding database methods) exceptions.
 10|	Error Handling: Are null pointer checks (Isempty, Size()>0, Isnull, Isnotnull etc) made wherever necessary?
 11|	Custom code calling web services should catch SOAP faults and log exceptions using LoggingService.logServiceException
-
+# General & Security $ Governor
+|#|Code Review Condition|Validated (Y/N)|Reviewer Comments|	Remarks|
+|--|--|--|--|---|
+1|	General: Identify if anything can be put into a separate method so that the readability and useability are taken care.			
+2|	General: No single-letter variable names other than loop control variables to be used.			
+3|	General: Split lines to avoid excessively long lines.			
+4|	General: Use Database.insert() whenever feasible.			
+5|	General: You must remove all commented-out code before checking-in code.			<br/>	General: System.Debug statements should be removed.			
+6|	Governer Limits: Do not call any asynchronous (@future) method inside any loop.			
+7|	Governer Limits: Do not execute any query or Data Manipulation Language(DML) statements in a loop, use a SOQL for loop.			
+8|	Governer Limits: Do not execute Data Manipulation Language(DML) or SOQL at class initialization (in constructor).			
+9|	Governer Limits: Reduce the number of DML operations by adding records to collections and performing DML operations against these collections.			
+10|	Governer Limits: Reduce the number of SOQL statements by preprocessing records and generating sets, which can be placed in single SOQL statement used with the IN clause or WHERE clause.			
+11|	Governor Limits: If you must use dynamic SOQL, use the escapeSingleQuotes method to sanitize user-supplied input.  Example is \'<field>\'			
+12|	Security: Any password and sensitive information stored in a Salesforce object must be encrypted and stored.			
+13|	Security: Session ID should always be encrypted in transmission. Session ID should not be sent to third parties. 			
+14|	"Security: Validate that the connection is being requested from a valid Salesforce server. Below is the regex to validate legitimate SFDC SOAP servers: https://[^/?]+\\.(sales\|visual\\.)force\\.com/services/(S\|\s)(O\|o)(A\|a)(P\|p)/(u\|c)/.*"			
+15|	Limit line length to 125 characters.			
 
 
 
