@@ -107,6 +107,10 @@
 25|	"VF Pages: You must use the standard field labels for all UI labels. For example, to use the standard field name for the Name field, in the Account object, instead use<br/> {!$ObjectType.Account.Fields.Name.Label}.<br/>To use the standard plural field name for the Name field, in the Account object, use {!$ObjectType.Account.Fields.Name.LabelPlural}."
 26	|"Inline Comments for Pages:<br/><!-- Your Comments --> Note – Mention Release Specific details in Inline comment wherever required"
 
+# CSS & JavaScript
+|#|Code Review Condition|Validated (Y/N)|Reviewer Comments|	Remarks|
+|--|--|--|--|---|
+
 
 
 
