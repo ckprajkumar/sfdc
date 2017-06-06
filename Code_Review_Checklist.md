@@ -1,5 +1,5 @@
 |#|Code Review Condition|Validated (Y/N)|	Reviewer Comments|	Remarks|
-|---|-------|---|---|--|
+|-|----|---|---|--|
 |1|Apex Class: All constants should have uppercase names, with logical sections of the name separated by underscores.||
 |2|"Apex Class: Check return value from all Database.delete(), Database.emptyRecycleBin(),Database.insert(),Database.undelete(), Database.update(), and Database.upsert() calls. If a list passed to any of these methods the call will return an array of results;code must check the all the return values in the returned array of results. updateMsg=Database.update(messageHeaderObj,false);if (!updateMsg.isSuccess()) { Database.Error[] err = updateMsg.getErrors();faultLogList.add(UTIL_MarketingManagement.getFaultLogWithStaticValues(UTIL_Constants.TRANSACTION_TYPE_MESSAGE,UTIL_Constants.CLASS_NAME, err[0].getStatusCode().name()+''+updateMsg.Id, updateMsg.getErrors()[0].getMessage()));}"
 3	|Apex Class: Classes that contain methods or variables defined with the webService keyword must be declared as global.			
