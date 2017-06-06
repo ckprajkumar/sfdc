@@ -74,7 +74,7 @@
 13|	Trigger: Implement Check Limits in all trigger methods			
 14|	Trigger: Implement SaveResults checks in all trigger methods			
 15|	Trigger: Handling of Errors in "after" trigger			
-16	Trigger:You must write triggers to support bulk operations (i.e., you must bulkify triggers) of up to 200 records for each call.			
+16|	Trigger:You must write triggers to support bulk operations (i.e., you must bulkify triggers) of up to 200 records for each call.			
 17|	"Trigger: Trigger class header comment should be in below format: <br/>/** 
    <br/>* Author: cognizant Team
  <br/>  * Description: <Trigger Description>
