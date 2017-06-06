@@ -52,8 +52,6 @@ Upon review, the level in the scanning tool has been changed from the default of
 
 ###  Test Code Coverage
 
-As mentioned above best practice states that test code coverage should be targeting 95%.
-
-In the Customer environment it has been decided that this target is reduced to 90% for all projects.
+As mentioned above best practice states that test code coverage should be targeting 95%.In the Customer environment it has been decided that this target is reduced to 90% for all projects.
 
 
