@@ -246,7 +246,9 @@ for(Database.SaveResults sr: lsr){
 
 ##### Custom Exception Handling: 
  Another option is to create Custom exception class and use internal Code error mechanisms to throw specific exceptions.
- try{
+
+```
+try{
  //some logic
  if(i>5){
     throw IPMException(IPMErrorCode.INVALID_DATA);
@@ -260,7 +262,7 @@ for(Database.SaveResults sr: lsr){
  }finally{
  //Handle anything after the logic (Transaction handling for example)
  }
-
+```
 
 #### Unit Test Classes - Test Classes For Triggers Should Perform Bulk Tests
 
