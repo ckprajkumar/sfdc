@@ -42,7 +42,7 @@
 39	|Apex Class: Don’t send parameters  to a method if they can be created within that method			
 40|	Apex Class: Reduce number of statements by combining multiple statements  where possible			
 41|	Apex Class: Using keyset to iterate			
-42|	"Apex Class: SOQL Injection may cause, wrong approach is as below:public PageReference query() {String qryString = 'SELECT Id FROM Contact WHERE ' + '(IsDeleted = false and Name like \'%' + name + '%\')';queryResult = Database.query(qryString) ;return null;}Right approach is as below:publicPageReference query() {String queryName = '%' + name + '%'queryResult = [SELECT Id FROM Contact WHERE (IsDeleted = false and Name like :queryName)];return null;}"			
+42|	"Apex Class: SOQL Injection may cause, wrong approach is as below:<br/> public PageReference query() {<br/> String qryString = 'SELECT Id FROM Contact WHERE ' + '(IsDeleted = false and Name like \'%' + name + '%\')';<br/> queryResult = Database.query(qryString) ;<br/> return null;<br/> }<br/> <br/> Right approach is as below:<br/> publicPageReference query() {<br/> String queryName = '%' + name + '%'queryResult = [SELECT Id FROM Contact WHERE (IsDeleted = false and Name like :queryName)];<br/> return null;<br/> }"			
 43|	Apex Class: Is there any empty Constructor in the class?			
 44|	Apex Class: For a List, is the isEmpty() check present instead of size()? This will improve the performance.			
 45|	Apex Class: Is there different method returning the same value?			
