@@ -1,1 +1,17 @@
-# sfdc
+# Automated Code Quality Checking
+
+The Cognizant or Customer environment will provide automatic code quality checking capability through the use of tools, such as SONARQUBE, and a number of rules preconfigured on the platform to work with the Customer source control system. The objective of which is to drive up code quality and ensure sustainability on the Customer platform as multiple projects look to deliver into a single ORG. The use of these tools is supplemental to peer reviews and quality checks in projects
+
+More details regarding this can be found within the associated tooling guides and documentation. However within the coding standards we highlight a couple of exception use cases to developers to ensure transparency and clarity in this area or advise where we have made changes to the default settings in the quality tool rules for information.
+### Confusing Ternary
+
+For long term maintainability and viability code must be readable and clear for parties external to a project to understand. Initial set of rules regarding confusing ternary were set so that errors of this type are deemed major. This has been revised in the case of direct examples using IF statements of which there are many ways to write them.
+
+Ideally in an if expression with an else clause, avoid negation in the test. For example, rephrase: if (x != y) diff(); else same(); as: if (x == y) same(); else diff(); Most if (x != y) cases without an else are often return cases, so consistent use of this rule makes the code easier to read.
+
+Given the above the prevailing view is that this is a MINOR rule infringement rather than a MAJOR.
+
+### Avoid JavaScript script lets
+
+Upon review the limit in the scanning tools is increased to 20 lines. It is expected that peer reviews will cover the rest of the gap in projects.
+
