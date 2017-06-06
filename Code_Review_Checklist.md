@@ -1,7 +1,7 @@
 |#|Code Review Condition|Validated (Y/N)|	Reviewer Comments|	Remarks|
 |-|----|---|---|--|
 |1|Apex Class: All constants should have uppercase names, with logical sections of the name separated by underscores.||
-|2|"Apex Class: Check return value from all Database.delete(), Database.emptyRecycleBin(),Database.insert(),Database.undelete(), Database.update(), and Database.upsert() calls. If a list passed to any of these methods the call will return an array of results;code must check the all the return values in the returned array of results. updateMsg=Database.update(messageHeaderObj,false);if (!updateMsg.isSuccess()) { Database.Error[] err = updateMsg.getErrors();faultLogList.add(UTIL_MarketingManagement.getFaultLogWithStaticValues(UTIL_Constants.TRANSACTION_TYPE_MESSAGE,UTIL_Constants.CLASS_NAME, err[0].getStatusCode().name()+''+updateMsg.Id, updateMsg.getErrors()[0].getMessage()));}"
+|2|"Apex Class: Check return value from all Database.delete(), Database.emptyRecycleBin(),Database.insert(),Database.undelete(), Database.update(), and Database.upsert() calls.<br/> If a list passed to any of these methods the call will return an array of results;code must check the all the return values in the returned array of results. <br/>updateMsg=Database.update(messageHeaderObj,false);<br/>if (!updateMsg.isSuccess()) { Database.Error[] err = updateMsg.getErrors();<br/>faultLogList.add(UTIL_MarketingManagement.getFaultLogWithStaticValues(UTIL_Constants.TRANSACTION_TYPE_MESSAGE,<br/>UTIL_Constants.CLASS_NAME, <br/>err[0].getStatusCode().name()+''+updateMsg.Id, <br/>updateMsg.getErrors()[0].getMessage()));<br/>}"
 3	|Apex Class: Classes that contain methods or variables defined with the webService keyword must be declared as global.			
 4|	Apex Class: Declare instance variables as private or protected.			
 5|	Apex Class: Declare only one variable per line of code.			
@@ -53,5 +53,5 @@
 51|	"Apex Class: for(MessageHeader__c messageObj:messageSch){ listIdSet.add(messageObj.List__c);}No need of 'for loop' here to convert list to set. Use Set.addAll(List) method."			
 52|	Limit line length to 125 characters.			
 53|	"Inline Comments for Class and Methods:// Your Comments Note – For comments regarding a particular line; Mention Release Specific details in Inline comment wherever requiredOR/* Your Comments*/ Note – For comments related to a block; Mention Release Specific details in Inline comment wherever required"	
-|s|xx<br/>vvv<h1> hhh|
+
 
