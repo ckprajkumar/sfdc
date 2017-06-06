@@ -29,7 +29,11 @@
 |Apex Trigger|Write Trigger Code in Classes Trigger code written directly into the trigger element quickly becomes difficult to maintain when the amount of code exceeds 20 lines of script.|High|
 |Apex Trigger|Trigger Logic At the beginning of all trigger code there should be a line that checks the custom setting to see if it should proceed for the user.|High|
 
-Images
+#### Use Custom Settings to control on/off for all Validation Rules
+Images to be Updated
+
+#### Use Custom Settings to control on/off for all Workflow Rules
+Images to be Updated
 
 #### APEX Trigger - Only Have One Trigger Per Object
 
@@ -191,7 +195,7 @@ List<Account> acctList = [SELECT Id, Name, Website, (SELECT Id, Name FROM Contac
 
 ### APEX Classes -Ensure Exceptions are Handled
 
-Image
+Images to be Updated
 
 ### APEX Classes -Ensure Exceptions are Handled
 The Technical approach for Exceptions handling has been proposed by keeping Salesforce standards consistent across projects
@@ -205,22 +209,77 @@ Exceptional Handling for Pages:
 1: Add <apex:pageMessages/> tag to your page
 2: Enclose your DML statement with try catch like this:
 
-Image
+```
+try{
+    //Your code may cause exception 
+    insert recordtoUpdate;
+}catch(System.Dmlexception e){
+    //To show specific Validation Rule Message
+    //Specific exception handling code here
+    ApexPages.addMessage(newApexPage.Messages.Severity.ERROR,e.getDmlMessage(0));
+}catch(System.Typeexception e){
+    //Another Specific exception to be shown
+    ApexPages.addMessage(newApexPage.Messages.Severity.ERROR,LABEL.IPM_ERR_DATE_FIELD);
+}catch(Exception e){
+    //Another Specific exception to be shown
+    ApexPages.addMessage(newApexPage.Messages.Severity.ERROR,LABEL.IPM_ERR_TECHNICAL_MESSAGE);
+}finally{
+    //Optional finally block
+    //code to run whether there is an exception or not
+}
+```
 
 ### APEX Classes -Ensure Exceptions are Handled
 Exceptional Handling for Automation or Asynchronous Calls: 
 1. Implement an exception handling in the following way:
-Image
+```
+Database.SaveResults[] lsr = Database.update(accounts,false);
+list<Case> caseWithErrors = new List<Case>();
+for(Database.SaveResults sr: lsr){
+    if(!sr.isSuccess()){
+       Case caseObj() = new Case();
+       caseObj.Name='Error for IPM';
+       caseObj.Description=sr;
+       caseWithErrors.add(caseObj);
+}
+```
 
-Custom Exception Handling: 
+##### Custom Exception Handling: 
  Another option is to create Custom exception class and use internal Code error mechanisms to throw specific exceptions.
- 
-Image
+ try{
+ //some logic
+ if(i>5){
+    throw IPMException(IPMErrorCode.INVALID_DATA);
+    }
+ }catch(IPMException e){
+ // Display the message to the user
+ ApexPages.addmessage(e.getMessage());
+ }catch(Exception e){
+ //Display the message to the user
+ ApexPages.addMessage(e.getMessage());
+ }finally{
+ //Handle anything after the logic (Transaction handling for example)
+ }
+
 
 #### Unit Test Classes - Test Classes For Triggers Should Perform Bulk Tests
 
-Image1
-Image2
+Use System.runAs()
+
+```
+@IsTest
+private class PortalRunAsTests{
+enum PortalType{CSPLiteUser,PowerPartner,PowerCustomerSuccess,CustomerSuccess}
+static testmethod void usertest(){
+User pu= getPortalUser(PortalType.PowerPartner,null,true);
+System.assert([select isPortalEnabled from user where id:pu.id].isPortalEnabled,
+'User was not flagged as portal enabled.');
+}
+System.RunAs(pu){
+System.assset([Select isPortalEnabled from user where id = :UserInfo.getUserId().isPortalEnabled],'User wasnt portal enabled within runas block');
+}
+}
+```
 
 ### Unit Test Classes - Unit Test Classes Should not Depend on Organization Data
 Unit test classes should not rely on the existence of any data within the organization.Data should be created at the beginning of all test methods; ideally the data creation will be wrapped up in a shared method in a data factory class stored elsewhere in the application.
@@ -240,9 +299,16 @@ insert accnt1;
 ```
 
 ###### Use of Test Factory Class
-Image
-
-
+With it you can say:
+```
+Account a = (Account)TestFactory.createSObject(new Account());
+```
+```
+Opportunity o = (Opportunity)TestFactory.createSObject(new Opportunity(AccountId=a.Id));
+```
+```
+Account[] aList = (Account[])TestFactory.createSOBjectList(new Account[],200);
+```
 ### Avoid Broken Null Check
 
 Avoid Broken Null Check 
