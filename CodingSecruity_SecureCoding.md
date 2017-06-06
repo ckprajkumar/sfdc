@@ -22,3 +22,10 @@ The following items do not have built-in XSS protections, so take extra care whe
 XSS filters on commands that are intentionally added to a page.
 
 ##### Custom JavaScript
+
+If you write your own JavaScript, the Force.com platform has no way to protect you. For example, the following code is vulnerable to XSS if used in JavaScript. Care should be taken when using JavaScript, and code must be subject to rigorous VA where such methods are used.
+```javascript
+var	foo = location.search; 
+document.write(foo);
+```
+
