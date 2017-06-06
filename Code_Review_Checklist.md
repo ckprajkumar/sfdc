@@ -84,7 +84,23 @@
 2|	VF Pages: Allignments should be properly maintained with a tab indent of four spaces.			
 3|	VF Pages: Define a String constant (static final) for messages/text that are not within the System.Label collection and that are not defined as a Custom Setting. 			
 4|	"VF Pages: Every visual force page must have an <apex:messages /> tag for the display of custom validation and other error messages.<br/><br/>Example of Visualforce Page Using apex:messages<br/><br/><apex:page controller=""AccountWizardController"" > <br/> <apex:form > <br/>  <apex:pageBlock mode=""detail""><br/>   <apex:messages /><br/> <<apex:pageBlockButtons>><br/>   <apex:commandButton action=""{!sa}"" Value=""Sa""/><br/>  </apex:pageBlockButtons><br/>  </apex:pageBlock><br/>    </apex:form ><br/></apex:page>"			
-5|	VF Pages: Give a meaningful description for each Visualforce page			
+5|	VF Pages: Give a meaningful description for each Visualforce page		
+6|	VF Pages: In “simple links” (non-actions), you must use apex:outputLink(non-action) instead of apex:commandLink(action)
+7|	VF Pages: In actions, when applicable, you must use the rerender attribute to refresh a part of page instead of submitting whole Visualforce page.
+8|	VF Pages: No duplicate labels present.
+9|	VF Pages: Place images, and other “static” resources for use with a Visualforce page, into a static resource. Then, from the Visualforce page, reference that static resource.
+10|	VF Pages: Provide meaningful comments before every <apex:page> element.
+11|	VF Pages: Should start the custom label name with uppercase letter and it should be short and meaningful. Words in the name should be separated by underscore.
+12|	VF Pages: Use global variables to reference general information about the current user and your organization on a Visualforce page. All global variables must be included in expression syntax, for example, {!$User.Name}.
+13|	VF Pages: Use the System.Label collection to access/use labels, that have been defined. All error messages, etc.must be defined as either a system label or a custom label.
+14	|VF Pages: Visualforce tag should have an ID and that ID should be unique.
+15|	VF Pages: You must define and use custom labels for all other UI labels, prompts, button labels, error messages, etc., when the label you want does not exist within $Label.Site. Custom labels are available in the $Label global variable.
+16|	VF Pages: You must mark a controller variable as “transient” if the variable is not needed between server calls.
+17	|"VF Pages: You must use the standard field labels for all UI labels. For example, <br/>To use the standard field name for the Name field, in the Account object, instead use<br/>{!$ObjectType.Account.Fields.Name.Label}.<br/>To use the standard plural field name for the Name field, in the Account object, use <br/>{!$ObjectType.Account.Fields.Name.LabelPlural}."
+18|	VF Pages: You must use Visualforce standard functions and components wherever available instead of creating different/separate functions and components.
+19|	VF Pages: Has the unnecessary/commented code removed?
+20|	VF: Page redirection - Are there any hardcoded URLS? Is Page.getURL() being used?
+
 
 
 
