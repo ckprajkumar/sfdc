@@ -110,9 +110,9 @@
 # CSS & JavaScript
 |#|Code Review Condition|Validated (Y/N)|Reviewer Comments|	Remarks|
 |--|--|--|--|---|
-1|	"CSS: You must place all CSS within a separate stylesheet, as a static resource. You must not place any CSS styles within a Visualforce page.<br/>Example of Including Static CSS Resource<br/><apex:stylesheet value=""{!$Resource.MyStylesheet}""/>"			
+1|	"CSS: You must place all CSS within a separate stylesheet, as a static resource. You must not place any CSS styles within a Visualforce page.<br/><br/>Example of Including Static CSS Resource<br/><apex:stylesheet value=""{!$Resource.MyStylesheet}""/>"			
 2|	CSS: You must place the <apex:stylesheet> tag at the top of the Visualforce page, before any content that will use any styles within the stylesheet. 			
-3|	"Javascript: If there is a JavaScript with in a Visualforce page, put into a separate JavaScript file, as a static resource. Then from the Visualforce page, call the JavaScript .<br/>Example of Including Static JavaScript Resource<br/><apex:includeScript value=""{!$Resource.MyJavascriptFile}""/>"			
+3|	"Javascript: If there is a JavaScript with in a Visualforce page, put into a separate JavaScript file, as a static resource. Then from the Visualforce page, call the JavaScript .<br/><br/>Example of Including Static JavaScript Resource<br/><apex:includeScript value=""{!$Resource.MyJavascriptFile}""/>"			
 4|	Javascript: Is the <apex:includeScript> tag at the bottom of the Visualforce page, just before the </apex:page>.			
 5|	Javascript: You must use the $Component global variable to retrieve a Visualforce component’s DOM ID.			
 
