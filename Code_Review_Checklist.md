@@ -101,10 +101,10 @@
 19|	VF Pages: Has the unnecessary/commented code removed?
 20|	VF: Page redirection - Are there any hardcoded URLS? Is Page.getURL() being used?
 21|	"VF Pages: A cross-site scripting weakness occurs when dynamically generated web pages display unvalidated, unfiltered, and unencoded user input allowing an attacker to embed malicious scripts into the generated page.<br/>Need to encode the parameters so that attackers cannot hack, listed below are the encoding functions:<br/>1. HTMLENCODE<br/>2. JSENCODE<br/>3. URLENCODE<br/>4. JSINHTMLENCODE<br/><br/>EXample: Incorrect script tag - <script>var foo ='{!$CurrentPage.parameters.userparam}';</script><br/>Correct script tag - <script>var foo = '{!JSENCODE($CurrentPage.parameters.userparam)}';</script>"
-22|	"VF Pages: VF Page Header example:<br/><!--<br/> Author               : <br/>  Date Created  : <br/>  Description     : <br/>-->"
+22|	"VF Pages: VF Page Header example:<br/> <!-- <br/> Author: <br/>  Date Created  : <br/>  Description     : <br/>-->"
 23|	VF Pages: Do not use &nbsp, <br> tags, instead implement using CSS. 
 24|	VF Pages: You must use the standard labels available in the $Label.Site global variable, for all user-interface (UI) labels, prompts, button labels, error messages, etc., when the label you want exists within $Label.Site. As a corollary, this mean that you must not create a custom label if an appropriate standard label already exists.
-25|	"VF Pages: You must use the standard field labels for all UI labels. For example, to use the standard field name for the Name field, in the Account object, instead use {!$ObjectType.Account.Fields.Name.Label}.<br/>To use the standard plural field name for the Name field, in the Account object, use {!$ObjectType.Account.Fields.Name.LabelPlural}."
+25|	"VF Pages: You must use the standard field labels for all UI labels. For example, to use the standard field name for the Name field, in the Account object, instead use<br/> {!$ObjectType.Account.Fields.Name.Label}.<br/>To use the standard plural field name for the Name field, in the Account object, use {!$ObjectType.Account.Fields.Name.LabelPlural}."
 26	|"Inline Comments for Pages:<br/><!-- Your Comments --> Note – Mention Release Specific details in Inline comment wherever required"
 
 
