@@ -99,4 +99,171 @@ staticList<ConnectApi.BatchInput>saleSupportBatchFeeds=newList<ConnectApi.BatchI
 ```
 
 ## APEX Trigger - Write Trigger Code in Classes…. continued 
+```
+//BEFORE INSERT EVENT 
+public void OnBeforeInsert(List<Opportunity> newList){
+//check the trigger setting flag is enable
+
+if(settings!=null&&settings.OPP_OpportunityDataLoadTranslations__c){
+
+/*Thismethodwillberesponsiblefor:
+*1.) AssigningAppropriate Proposal Type on Opportunity Record.
+*2.)Assign Appropriate Opportunity Type on Opportunity Record.
+*3.)Assign Appropriate Opportunity Record Type on Opportunity Record.
+*4.)Assign Appropriate Opportunity Close Date on Opportunity Record.
+*5.)Assign Appropriate Opportunity Stage on Opportunity Record.
+*6.)Assigning Appropriate Opportunity Amendment Group on Opportunity Record.
+*/
+OpportunityDataLoadTranslations(newList);
+}
+}
+```
+### APEX Trigger - Trigger Logic
+At the beginning of all trigger code there should be a line that checks the custom setting to see if it should proceed for the user.
+
+```
+trigger OpportunityTrigger on Opportunity(before insert,before update,after insert,after update,after delete,after undelete)
+{
+OpportuntiyTriggerHandlerNewhandler=newOpportuntiyTriggerHandlerNew();
+//getthesettingsinstance
+
+OB_TriggerSettings__csettings=OB_TriggerSettings__c.getInstance();
+
+}
+```
+
+
+### APEX Classes - Do Not Expect Queries to Return Single Objects
+
+Store the SOQL result in an array or list.
+```
+//Approach -  specify a MyCustomSetUpObject__c[] arrayMyCustomSetUpObject__c[]  
+myObjArray = [SELECT Id, Name, Setting__c FROM MyCustomSetUpObject__c WHERE Id =: myObjId];
+//If the array has entries in it then proceed 
+if(myObjArray.size() > 1){myObj  = myObjArray[0];
+//Update the settings 
+myObj. Setting__c = ‘New Setting Details’;
+//Update the object 
+try{
+       update myObj;
+     } Catch (DMLException dml){
+
+    // Invoke the common exception handling class log the exception , also throw a meaniful error message back to users if controller get called from VF or Lightning components
+     } Catch ( Exception ex){
+   // Invoke the common exception handling class log the exception , also throw a meaniful error message back to users if controller get called from VF or Lightning components  
+}
+}
+```
+### APEX Classes - Do Not Hard Code Ids
+
+Ids to specific information in the environment such as a record id type or a specific user profile should not hardcoded into the system.
+Leverage Custom Settings or Custom Label.
+Store the SOQL result in an array or list.
+```
+Map<String, AccountEstWorth__c> acctWorthRefTable = AccountEstWorth__c.getAll();
+
+for (Account acct: Trigger.new) {                                                       if(acctWorthRefTable.containsKey(acct.ClassificationCode__c)){
+     AccountEstWorth__c aewRec = acctWorthRefTable.get(acct.ClassificationCode__c);      acct.EstimatedWorth__c = aewRec.EstWorth__c;      
+     }
+}
+```
+
+AVOID:
+```
+if (acct.ClassificationCode__c.equals('AC-099')||acct.ClassificationCode__c.equals('NM-467')) {acct.EstimatedWorth__c = 25000000;
+}
+```
+### APEX Classes - Avoid Hard coding Dynamic Queries
+Call getQuery method to return the string used to pass into dynamic queries. The QueryLocator should be used solely as a utility class to construct the query string from the static query.
+List<Account> accnts;
+//Query 1 return all accounts which are in the gold tier 
+string query1String = Database.getQueryLocator([SELECT Id FROM Account WHERE Tier__c = ‘Gold’]).getQuery();
+Accnts = DynamicQueryMethod(query1String);
+
+AVOID://Query 1 return all accounts which are in the gold tier
+Accnts = DynamicQueryMethod(‘SELECT Id FROM Account WHERE Tier__c = \‘Gold\’’);
+
+#### APEX Classes -Use Relationship and Aggregate Queries
+
+Relationship queries or subqueries should be used to reduce the number of SOQL calls issued from a customization.
+
+List<Account> acctList = [SELECT Id, Name, Website, (SELECT Id, Name FROM Contacts)FROM Account WHERE (Id IN :acctIDs)];
+
+### APEX Classes -Ensure Exceptions are Handled
+
+Image
+
+### APEX Classes -Ensure Exceptions are Handled
+The Technical approach for Exceptions handling has been proposed by keeping Salesforce standards consistent across projects
+There are 3 things that needs to be looked at as a part of the Exception Handling: 
+1.Exception Handling
+2.Debugging
+3.Prevention of the Unhand able Exceptions 
+Eg: Governor Limits Exceptions.
+Technical Approach: 
+Exceptional Handling for Pages: 
+1: Add <apex:pageMessages/> tag to your page
+2: Enclose your DML statement with try catch like this:
+
+Image
+
+### APEX Classes -Ensure Exceptions are Handled
+Exceptional Handling for Automation or Asynchronous Calls: 
+1. Implement an exception handling in the following way:
+Image
+
+Custom Exception Handling: 
+ Another option is to create Custom exception class and use internal Code error mechanisms to throw specific exceptions.
+ 
+Image
+
+#### Unit Test Classes - Test Classes For Triggers Should Perform Bulk Tests
+
+Image1
+Image2
+
+### Unit Test Classes - Unit Test Classes Should not Depend on Organization Data
+Unit test classes should not rely on the existence of any data within the organization.Data should be created at the beginning of all test methods; ideally the data creation will be wrapped up in a shared method in a data factory class stored elsewhere in the application.
+```
+static testMethod void TestFunctionality()
+{ 
+//Create products to be associated with order    
+Product2 prod1 = new Product2();    
+prod1.Name = 'Product1';  
+prod1.Price__c = 100;
+insert prod1;                                 
+//Create account to add to order    
+Account accnt1 = new Account();  
+accnt1.Name ='Test1 Account';    
+insert accnt1;
+}
+```
+
+###### Use of Test Factory Class
+Image
+
+
+### Avoid Broken Null Check
+
+Avoid Broken Null Check 
+
+Instead of this line:
+```
+      if(myStringData != null && myStringData != '') {
+```
+You can use this one:
+```
+      if(String.isBlank(myStringData) {
+```     
+      
+Instead of the following code:
+```
+if(accList != null && accList.size() == 0){
+```
+You can use this one (Less Code, ONE test):
+```
+     if (!accList.isEmpty()) {
+```
+
+
 
