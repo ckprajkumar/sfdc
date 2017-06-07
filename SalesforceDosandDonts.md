@@ -182,13 +182,19 @@ acct.EstimatedWorth__c = 25000000;
 }
 ```
 ### APEX Classes - Avoid Hard coding Dynamic Queries
-Call getQuery method to return the string used to pass into dynamic queries. The QueryLocator should be used solely as a utility class to construct the query string from the static query.
+Call getQuery method to return the string used to pass into dynamic queries.
+The QueryLocator should be used solely as a utility class to construct the query string from the static query.
+```
 List<Account> accnts;
-//Query 1 return all accounts which are in the gold tier 
-string query1String = Database.getQueryLocator([SELECT Id FROM Account WHERE Tier__c = ‘Gold’]).getQuery();
-Accnts = DynamicQueryMethod(query1String);
 
-AVOID://Query 1 return all accounts which are in the gold tier
+//Query 1 return all accounts which are in the gold tier 
+
+string query1String = Database.getQueryLocator([SELECT Id FROM Account WHERE Tier__c = ‘Gold’]).getQuery();
+
+Accnts = DynamicQueryMethod(query1String);
+```
+
+AVOID: Query 1 that returns all accounts which are in the gold tier
 Accnts = DynamicQueryMethod(‘SELECT Id FROM Account WHERE Tier__c = \‘Gold\’’);
 
 #### APEX Classes -Use Relationship and Aggregate Queries
