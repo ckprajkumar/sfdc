@@ -47,7 +47,8 @@ public class ConfigureProducts
 {
 ..
 ..
-/******************************************************************* Purpose: Detailed description of the method
+/******************************************************************* 
+Purpose: Detailed description of the method
 
 Parameters: [optional] Returns: [optional]
 Throws [Exceptions]: [optional]
