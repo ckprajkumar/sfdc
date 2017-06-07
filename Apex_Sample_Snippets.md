@@ -17,6 +17,7 @@
 16.	Minimum testcoverage expected for agencyfees is 85%
 
 # Sample Code Snippets
+
 ####	Considerations Querying Large Data Set 
 
 Use of Limit Clause - For example, if the results are too large, the syntax below causes a runtime exception:
@@ -25,35 +26,38 @@ Use of Limit Clause - For example, if the results are too large, the syntax belo
 records to exceed your heap limit.
 
 Account[] accts = [SELECT id FROM account];
-Instead, use a SOQL query for loop as in one of the following examples:
+
+
 // Use this format for efficiency if you are executing DML statements 
 // within the for loop.  Be careful not to exceed the 150 DML statement limit.
+
 for (List<Account> accts&nbsp;: [SELECT id, name FROM account
                             WHERE name LIKE 'Acme']) {
     // Your code here
     update accts;
     }
 ```
+
 ###	Use of @future
 ```
 {
     //By passing the @future method a set of Ids, it only needs to be
     //invoked once to handle all of the data. 
+    
     asyncApex.processAccount(Trigger.newMap.keySet());
 } 
 
 global class asyncApex {
-   @future 
-  public static void processAccount(Set<Id> accountIds) {
-       List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact where accountId IN&nbsp;:accountIds];
-       for(Contact c: contacts){
- 	 System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' + c.lastname +']');
- 	                        c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
-        }
-// DML Operations goes here     
+ @future 
+ public static void processAccount(Set<Id> accountIds) {
+ List<Contact> contacts = [select id, salutation, firstname, lastname, email from   Contact where accountId IN&nbsp;:accountIds];
+ for(Contact c: contacts){
+ System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '],LastName[' + c.lastname +']');
+ c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
+    }
+    // DML Operations goes here     
   }
 } 
-
 ```
 ### 	Batch Script Apex Class:
 ```
@@ -61,17 +65,21 @@ global class asyncApex {
      public void CallingBatchJob()
      {
      
-        Boolean runApex = true;
-        BatchClassInitializer batchClassVariable = new BatchClassInitializer ();
-        // Main Query Locator
-        batchClassVariable.query = // Get Query Parameter From Custom Settings;
-		// Getting Custom Setting Batch Size Value
-	    List<BatchRuleSize__c> batchparam = BatchRuleSize__c.getall().values();
-        Integer scope_size = // Getting Batch Size From Custom Settings if batch value do not need to be defaulted to 200
+    Boolean runApex = true;
+    
+    BatchClassInitializer batchClassVariable = new BatchClassInitializer ();
+    
+    // Main Query Locator
+    
+    batchClassVariable.query = // Get Query Parameter From Custom Settings;
+	
+	// Getting Custom Setting Batch Size Value
+	List<BatchRuleSize__c> batchparam = BatchRuleSize__c.getall().values();
+    Integer scope_size = // Getting Batch Size From Custom Settings if batch value do not need to be defaulted to 200
         
         
         // Check if process is running..
-        for(AsyncApexJob job :[Select Id, Status,JobType,MethodName From AsyncApexJob where JobType = : 'BatchApex' AND MethodName =: // Method Name used for Innvocation]) 
+for(AsyncApexJob job :[Select Id, Status,JobType,MethodName From AsyncApexJob where JobType = : 'BatchApex' AND MethodName =: // Method Name used for Innvocation]) 
         {
         	runApex = false;
         }
@@ -79,19 +87,19 @@ global class asyncApex {
         if(runApex)
         { 	
          
-    
        // Execute batch apex 
         ID batchprocessid = Database.executeBatch(batchClassVariable,scope_size);
 	}
 Else{
 	// Else do some error processing
+	}
 }
-     }
  ```
  
  ### Batch Apex Class:
 ```
-global class BatchClassName implements Database.Stateful,Database.Batchable<sObject>
+global class 
+BatchClassName implements Database.Stateful,Database.Batchable<sObject>
 {
 	public String query;
 	// Declaration of Stateful variables for remembering states
@@ -105,11 +113,12 @@ global class BatchClassName implements Database.Stateful,Database.Batchable<sObj
 	{
 
 	// Main Batch Job Processing Logic
-
+	
 	}
 global void finish(Database.BatchableContext BC)
 	{
 	// Finish Method used for Updating/Sending Completion Email, also used for catching exceptions	
+
 }	
 ```
 ### Update/Insert/Upsert in Apex:
