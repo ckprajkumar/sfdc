@@ -12,14 +12,14 @@
 -	Field name should be less than 40 characters and Self- Explanatory, why this is created for.
 -	Field description should follow following pattern
      <Module Name>#<GEO>#<FIELD USAGE >#<Functional Description>
--	GEO = APAC,EMEA, AMER or GLOBAL
+     Example : GEO = APAC,EMEA, AMER or GLOBAL
 -	FIELD USAGE 
      -	If the field is used by integration points then mention the integration      service as well , for example : INTG_APRIMO . If the field is used by more than one integration points than you can expand the definition as INTG_SYS1_INGT_SYS2
     -	If the field is used for data migration from other system then tag the field      as DATAMG
--	Example:   MJA#EMEA#INTG_SIEBEL#DATAMG# 
-The field captures whether the account is major account or not and the value flows from Siebel to SFDC for EMEA.
-- Consult with object owners before creating the fields.
+	 Example:   MJA#EMEA#INTG_SIEBEL#DATAMG# 
+     The field captures whether the account is major account or not and the value flows from Siebel to SFDC for EMEA.
 
+- Consult with object owners before creating the fields.
 
 ## Page Layouts
 -	To reduce the number of page layouts to maintain, use the same page layout for all profiles for a specific record type.
@@ -38,7 +38,8 @@ The field captures whether the account is major account or not and the value flo
 -	If users in your organization speak different languages, translate your error messages using the translation workbench. 
 -	Consider what fields are visible and editable for users on their page layouts due to field-level security. Fields that are not visible or editable for the user are still available in the formula for a validation rule and can cause a validation error.
 -	Use the record type ID merge field in your formula to apply different validation for different record types.
--	When using a validation rule to ensure that a number field contains a specific value, use the ISNULL function to include fields that do not contain any value. For example, to validate that a custom field contains a value of '1,' use the following validation rule to display an error if the field is blank or any other number:                        OR(ISNULL(field__c), field__c<>1)
+-	When using a validation rule to ensure that a number field contains a specific value, use the ISNULL function to include fields that do not contain any value. For example, to validate that a custom field contains a value of '1,' use the following validation rule to display an error if the field is blank or any other number: OR(ISNULL(field__c), field__c<>1)
+
 ## Workflows and Approval Process Best Practices:
 -	Avoid associating more than one field update with a rule or approval process that applies different values to the same field.
 -	You can't convert a lead that has pending actions ( generated from time dependent workflow).
