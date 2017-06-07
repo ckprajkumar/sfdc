@@ -205,7 +205,7 @@ List<Account> acctList = [SELECT Id, Name, Website, (SELECT Id, Name FROM Contac
 
 ### APEX Classes -Ensure Exceptions are Handled
 
-Images to be Updated
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/APEX%20Classes%20-Ensure%20Exceptions%20are%20Handled.jpg)
 
 ### APEX Classes -Ensure Exceptions are Handled
 The Technical approach for Exceptions handling has been proposed by keeping Salesforce standards consistent across projects
