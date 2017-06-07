@@ -1,7 +1,7 @@
 # Configuration Standards
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 ## Object Standards
- -	Before creating an object you must check that if a standard object or an existing custom object can be used for the same requirement or not.
+ -	Before creating an object you must check that if a standard object or an existing custom object can be used for the same                 requirement or not.
 -	Object name should be Self- Explanatory, why this is created for.
 -	You must always provide the detail description while creating the object.
 -  Sharing model should be default private for all objects, make use of public group sharing and manual sharing to create data visibility, unless explicit business needs to make it public available for all roles across the org.
@@ -10,15 +10,10 @@
 
 -	Before creating a field, check that if an existing custom field can be used for the same requirement or not.
 -	Field name should be less than 40 characters and Self- Explanatory, why this is created for.
--	Field description should follow following pattern
-<Module Name>#<GEO>#<FIELD USAGE >#<Functional Description>
-where GEO = APAC,EMEA, AMER or GLOBAL
-
-    -  Field usage
-	If the field is used by integration points then mention the integration      service as well , for example : INTG_APRIMO . If the field is used by more than one integration points than you can expand the definition as INTG_SYS1_INGT_SYS2
-    -	If the field is used for data migration from other system then tag the field      as DATAMG
-	 Example:   MJA#EMEA#INTG_SIEBEL#DATAMG# 
-     The field captures whether the account is major account or not and the value flows from Siebel to SFDC for EMEA.
+-	Field description should follow following pattern <Module Name>#<GEO>#<FIELD USAGE>#<Functional Description>
+        - where GEO = APAC,EMEA, AMER or GLOBAL
+	- Field usage : If the field is used by integration points then mention the integration      service as well , for example :              INTG_APRIMO . If the field is used by more than one integration points than you can expand the definition as            		 INTG_SYS1_INGT_SYS2. If the field is used for data migration from other system then tag the field      as DATAMG
+	 Example:   MJA#EMEA#INTG_SIEBEL#DATAMG#. The field captures whether the account is major account or not and the value flows from Siebel to SFDC for EMEA.
 
 - Consult with object owners before creating the fields.
 
