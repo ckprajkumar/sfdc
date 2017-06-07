@@ -4,7 +4,7 @@
 -	All commits need comments including User Story ID and description of the work performed. 
 -	The source control repo follows the Git Flow branching model, as follows: 
 
-`Picture to be Updated`
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture1.png.jpg)
 
 -	Development work starts by creating and committing to Feature branches from the Develop branch. 
 -	When Feature branch code is ready and peer reviewed, a Pull Request is requested to merge it into the Develop branch. 
