@@ -30,11 +30,9 @@
 |Apex Trigger|Trigger Logic At the beginning of all trigger code there should be a line that checks the custom setting to see if it should proceed for the user.|High|
 
 #### Use Custom Settings to control on/off for all Validation Rules
-Images to be Updated
-
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/ControlOnOff.jpg)
 #### Use Custom Settings to control on/off for all Workflow Rules
-Images to be Updated
-
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Cntlr2.jpg)
 #### APEX Trigger - Only Have One Trigger Per Object
 
 In order to have control on how the code is executed and also minimize the number of queries performed there should only ever be one trigger written per object.
@@ -211,8 +209,11 @@ List<Account> acctList = [SELECT Id, Name, Website, (SELECT Id, Name FROM Contac
 The Technical approach for Exceptions handling has been proposed by keeping Salesforce standards consistent across projects
 There are 3 things that needs to be looked at as a part of the Exception Handling: 
 1.Exception Handling
+
 2.Debugging
+
 3.Prevention of the Unhand able Exceptions 
+
 Eg: Governor Limits Exceptions.
 Technical Approach: 
 Exceptional Handling for Pages: 
