@@ -87,19 +87,19 @@ Trigger code written directly into the trigger element quickly becomes difficult
 ```
 
 public class OpportuntiyTriggerHandlerNew {
-publicclassOpportuntiyTriggerHandlerNew
+public class OpportuntiyTriggerHandlerNew
 {
-List<Opportunity>oppList=newList<Opportunity>();
-List<Opportunity>OpptyList=newList<Opportunity>();
-List<Opportunity>OppProducerList=newList<Opportunity>();
-publicstaticBooleanisFirstTime=true;
-Map<Id,Profile>chatterEnabledProfileMap=newMap<Id,Profile>();
-List<PermissionSetAssignment>chatterPermAssgmtList=newList<PermissionSetAssignment>();
-staticList<Messaging.SingleEmailMessage>allMails=newList<Messaging.SingleEmailMessage>();
-staticList<ConnectApi.BatchInput>underwriterBatchFeeds=newList<ConnectApi.BatchInput>();
-staticList<ConnectApi.BatchInput>saleSupportBatchFeeds=newList<ConnectApi.BatchInput>();
+List<Opportunity> oppList=newList<Opportunity>();
+List<Opportunity> OpptyList=newList<Opportunity>();
+List<Opportunity> OppProducerList=newList<Opportunity>();
+public static Boolean isFirstTime=true;
+Map<Id,Profile> chatterEnabledProfileMap = new Map<Id,Profile>();
+List<PermissionSetAssignment> chatterPermAssgmtList = new List<PermissionSetAssignment>();
+static List<Messaging.SingleEmailMessage> allMails=new List<Messaging.SingleEmailMessage>();
+static List<ConnectApi.BatchInput> underwriterBatchFeeds=new List<ConnectApi.BatchInput>();
+static List<ConnectApi.BatchInput> saleSupportBatchFeeds= new List<ConnectApi.BatchInput>();
 
-//getthesettingsinstance OB_TriggerSettings__c settings=OB_TriggerSettings__c.getInstance();
+//get the settings instance OB_TriggerSettings__c settings=OB_TriggerSettings__c.getInstance();
 ```
 
 ## APEX Trigger - Write Trigger Code in Classes…. continued 
@@ -110,7 +110,7 @@ public void OnBeforeInsert(List<Opportunity> newList){
 
 if(settings!=null&&settings.OPP_OpportunityDataLoadTranslations__c){
 /*Thismethodwillberesponsiblefor:
-*1.) AssigningAppropriate Proposal Type on Opportunity Record.
+*1.)AssigningAppropriate Proposal Type on Opportunity Record.
 *2.)Assign Appropriate Opportunity Type on Opportunity Record.
 *3.)Assign Appropriate Opportunity Record Type on Opportunity Record.
 *4.)Assign Appropriate Opportunity Close Date on Opportunity Record.
