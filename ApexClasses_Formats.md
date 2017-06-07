@@ -214,7 +214,7 @@ catch( Exception e)
 }
 finally
 {
-//Avoid doing this throw new "Exception()";
+//Avoid doing this throw new exception()
 }
 ```
 Don’t needlessly access Exception values unless you’re going to use them. Don’t do this:
