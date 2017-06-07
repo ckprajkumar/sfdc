@@ -3,7 +3,8 @@
 It is not legal to define a class and interface with the same name in the same class. It is also not legal for an inner class to have the same name as its outer class. However, methods and variables have their own namespaces within the class so these three types of names do not clash with each other. In particular it is legal for a variable, method, and a class within a class to have the same name.
 
 ```sh
-/********************************************************************** Name: ConfigureOpportunity()
+/********************************************************************** 
+Name: ConfigureOpportunity()
 Copyright © 2015  Salesforce
 ======================================================
 ======================================================
@@ -91,24 +92,24 @@ Always use braces to…else,surroundwhile,codefor).blocks (eg if
 
 Never use the pattern:
 ```sh
-If ([condition]) //do something else
-//do something else
+if ([condition]) 
+// statements
 ```
 Always use:
 ```sh
-If ([condition])
+if ([condition])
 {
-//do something
+//statement 1
 }
 else
 {
-//do something else
+//statement 2
 }
 ```
 Never leave empty code blocks:
 ```sh
-If([condition]) { } else {
-//do something
+if([condition]) { } else {
+// statement
 }
 ```
 
@@ -131,7 +132,7 @@ Classes that have too many fields can become unwieldy and could be redesigned to
 
 For example, consider:
 ```sh
-C	class Person {	// many separate fields
+public	class Person {	// many separate fields
 int	birthYear;	
 int	birthMonth;	
 int	birthDate;	
@@ -192,11 +193,11 @@ Avoid rethrowing an existing exception, or wrapping it in another exception – 
 ```sh
 try
 {
-// do something
+// statements
 }
 catch (SomeException se)
 {
-throw se;  //Do not do this
+throw se;  // incorrect statement
 throw new SomeException(se); //nor this
 }
 ```
@@ -204,7 +205,7 @@ Avoid throwing exceptions in a finally block as it can hide other exceptions:
 ```sh
 try
 {
-// Here do some stuff
+// statements
 }
 catch( Exception e)
 {
@@ -218,14 +219,14 @@ finally
 Don’t needlessly access Exception values unless you’re going to use them. Don’t do this:
 ```sh
 try {
-// do something 
+// statements
 } catch (SomeException se) { se.getMessage(); 
 }
 ```
 Instead use the exception:
 ```sh
 try {
-// do something 
+// statements
 } catch (SomeException se) { 
 ApexPages.addMessages(se); 
 }
