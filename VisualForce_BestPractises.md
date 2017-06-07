@@ -1,10 +1,11 @@
-# Visualforce  Best Practices 
-Salesforce provides good guidelines for improving visualforce pages performance and design   considerations.Refer below links for detailed documentation
+# Visualforce Best Practices 
+Salesforce provides good guidelines for improving visualforce pages performance and design considerations. Refer below links for detailed documentation
 
 http://wiki.developerforce.com/page/Visualforce_Performance:_Best_practices
+
 http://www.salesforce.com/us/developer/docs/pages/index.htm
 
-These documentation covers  best practices for
+These documentation covers best practices for
 -	Improving Visualforce Performance
 -	Accessing Component IDs
 -	Static Resources
