@@ -166,7 +166,7 @@ Avoid creating deeply nested if-then statements since they are harder to read an
 if (x>y) {
 if (y>z) {
 if (z==x) {
-// !! too deep
+//  too deep
 }
 }
 }
@@ -214,7 +214,7 @@ catch( Exception e)
 }
 finally
 {
-//Avoid doing this throw new Exception();
+//Avoid doing this throw new "Exception()";
 }
 ```
 Don’t needlessly access Exception values unless you’re going to use them. Don’t do this:
