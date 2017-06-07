@@ -109,7 +109,6 @@ public void OnBeforeInsert(List<Opportunity> newList){
 //check the trigger setting flag is enable
 
 if(settings!=null&&settings.OPP_OpportunityDataLoadTranslations__c){
-
 /*Thismethodwillberesponsiblefor:
 *1.) AssigningAppropriate Proposal Type on Opportunity Record.
 *2.)Assign Appropriate Opportunity Type on Opportunity Record.
@@ -126,7 +125,8 @@ OpportunityDataLoadTranslations(newList);
 At the beginning of all trigger code there should be a line that checks the custom setting to see if it should proceed for the user.
 
 ```
-trigger OpportunityTrigger on Opportunity(before insert,before update,after insert,after update,after delete,after undelete)
+trigger OpportunityTrigger on Opportunity(before insert,before update,after insert,
+after update,after delete,after undelete)
 {
 OpportuntiyTriggerHandlerNewhandler=newOpportuntiyTriggerHandlerNew();
 //getthesettingsinstance
@@ -140,6 +140,7 @@ OB_TriggerSettings__csettings=OB_TriggerSettings__c.getInstance();
 ### APEX Classes - Do Not Expect Queries to Return Single Objects
 
 Store the SOQL result in an array or list.
+
 ```
 //Approach -  specify a MyCustomSetUpObject__c[] arrayMyCustomSetUpObject__c[]  
 myObjArray = [SELECT Id, Name, Setting__c FROM MyCustomSetUpObject__c WHERE Id =: myObjId];
@@ -173,8 +174,11 @@ for (Account acct: Trigger.new) {                                               
 ```
 
 AVOID:
+
 ```
-if (acct.ClassificationCode__c.equals('AC-099')||acct.ClassificationCode__c.equals('NM-467')) {acct.EstimatedWorth__c = 25000000;
+if (acct.ClassificationCode__c.equals('AC-099')||acct.ClassificationCode__c.equals('NM-467')) 
+{
+acct.EstimatedWorth__c = 25000000;
 }
 ```
 ### APEX Classes - Avoid Hard coding Dynamic Queries
@@ -331,7 +335,5 @@ if(accList != null && accList.size() == 0){
 You can use this one (Less Code, ONE test):
 ```
      if (!accList.isEmpty()) {
+}
 ```
-
-
-
