@@ -41,13 +41,13 @@ return "A. O. K."; // return not recommended here
 }
 }
 ```
-1.	Exceptions should never be suppressed without a comment in code explaining why 
-2.	Empty exception handlers are never acceptable. 
-3.	Exceptions should be logged to a logging object: ApplicationLog__c 
-4.	Bulk log messages should be collated and passed to the Log in one call to prevent excessive DML calls 
-5.	Page based exceptions should be added to ApexPages.Messages 
-6.	In triggers, exceptions should use addError() method to prevent committing 
-7.	Do not catch NullPointerExceptions – identify and resolve the core issue. 
+1. Exceptions should never be suppressed without a comment in code explaining why 
+2. Empty exception handlers are never acceptable. 
+3. Exceptions should be logged to a logging object: ApplicationLog__c 
+4. Bulk log messages should be collated and passed to the Log in one call to prevent excessive DML calls 
+5. Page based exceptions should be added to ApexPages.Messages 
+6. In triggers, exceptions should use addError() method to prevent committing 
+7. Do not catch NullPointerExceptions – identify and resolve the core issue. 
 ### ExceptionLoggingHelper
 
 The Exception Logging Helper is used as follows:
@@ -74,21 +74,22 @@ For example, use:
 <apex:outputLink value="{!$Page.otherPage}">
 ```
 
-instead of:
+Instead of:
 `<a href=”/apex/otherPage”>Go here</a>`
+
 ### SOQL inside loops
 
 There is a Governor limit to the number of SOQL queries in an execution context. Ensure that SOQL is executed outside a loop as much as possible to prevent this limit being breached:
 
 Do not do:
-
+```sh
 for (Account a : [SELECT Id, Name FROM Account WHERE Name LIKE 'Acme%'])
 {
 // Your code without DML statements here a.Name=’new name’;
 update a;
 }
-
-instead do:
+```
+Instead do:
 ```sh
 List<Account> accts : [SELECT Id, Name FROM Account WHERE Name LIKE 'Acme%'];
 For(Account a: accts)
@@ -98,8 +99,11 @@ a.name=’new name’;
 update accts;
 }
 ```
-Similarly, design triggers to support bulk invocation.  Do not do:
 
+Similarly, design triggers to support bulk invocation.  
+
+Do not do:
+```sh
 trigger contactTest on Contact (before insert, before update)
 {
 for(Contact ct: Trigger.new)
@@ -111,6 +115,7 @@ System.debug(‘do something’);
 }
 }
 }
+```
 
 Instead do:
 ```sh
@@ -137,17 +142,17 @@ System.debug(‘do something');
 If returning a large set of queries causes you to exceed your heap limit, then a SOQL query for loop must be used instead. It can process multiple batches of records through the use of internal calls to query and queryMore.
 
 Instead of:
-
+```sh
 Account[] accts = [SELECT id FROM account]; For (Account acct : accts)
 {
 //Do Something
 }
-
+```
 Use:
 ```sh
 for (List<Account> acct : [SELECT id, name FROM account])
 {
- //Do Something
+ //Statement
 }
 ```
 ### Use @future appropriately
@@ -162,16 +167,19 @@ Here is a list of governor limits specific to the @future annotation:
 2.	No more than 200 method calls per Salesforce license per 24 hours 
 
 It's important to make sure that the asynchronous methods are invoked in an efficient manner and that the code in the methods is efficient. In the following example, the Apex trigger invokes an asynchronous method for each Account record it wants to process: 
-
-    {
-     for(Account a: Trigger.new){
-    // Invoke the @future method for each Account
-    // This is inefficient and will easily exceed the governor limit of 
-    // at most 10 @future invocation per Apex transaction
-    asyncApex.processAccount((String)a.id);
-      }     
-    }
+```sh
+{
+  for(Account a: Trigger.new){
+  // Invoke the @future method for each Account
+  // This is inefficient and will easily exceed the governor limit of 
+  // at most 10 @future invocation per Apex transaction
+  asyncApex.processAccount((String)a.id);
+  }     
+}
+```
 Here is the Apex class that defines the @future method:
+
+```sh
 global class asyncApex {
 
     @future 
@@ -180,37 +188,40 @@ global class asyncApex {
                                  from Contact where accountId = :accountId];
  	   
        for(Contact c: contacts){
- 	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' +                      c.lastname +']');
+ 	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' + c.lastname +']');
  	   c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
        }
         update contacts;        
      }   
     }
+```
 
 Since the @future method is invoked within for loop, it will be called N-times (depending on the number of accounts being processed). So if there are more than ten accounts, this code will throw an exception for exceeding a governor limit of only ten @future invocations per Apex transaction. 
 
 Instead, the @future method should be invoked with a batch of records so that it is only invoked once for all records it needs to process: 
-
+```sh
     {
     //By passing the @future method a set of Ids, it only needs to be
     //invoked once to handle all of the data. 
     asyncApex.processAccount(Trigger.newMap.keySet());
     }
+```
 
 And now the @future method is designed to receive a set of records:
-
+```sh
     global class asyncApex {
  
      @future 
        public static void processAccount(Set<Id> accountIds) {
-       List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact                               where accountId IN :accountIds];
+       List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact where accountId IN :accountIds];
        for(Contact c: contacts){
- 	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' +                             c.lastname +']');
+ 	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' + c.lastname +']');
  	   c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
        }
        update contacts;
      }
     }
+```
 
 Notice the minor changes to the code to handle a batch of records. It doesn't take a whole lot of code to handle a set of records as compared to a single record, but it's a critical design principle that should persist across all of your Apex code - regardless if it's executing synchronously or asynchronously. 
 
@@ -221,7 +232,7 @@ Since Apex code executes in bulk, it is essential to have test scenarios to veri
 The example below shows you a poorly written trigger that does not handle bulk properly and therefore hits a governor limit. Later, the trigger is revised to properly handle bulk datasets. 
 
 Here is the poorly written contact trigger. For each contact, the trigger performs a SOQL query to retrieve the related account. The invalid part of this trigger is that the SOQL query is within the for loop and therefore will throw a governor limit exception if more than 100 contacts are inserted/updated. 
-
+```sh
 {  
    for(Contact ct: Trigger.new){	
    	   Account acct = [select id, name from Account where Id=:ct.AccountId];
@@ -232,9 +243,10 @@ Here is the poorly written contact trigger. For each contact, the trigger perfor
    	   }
    } 
 }
+```
 
 Here is the test method that tests if this trigger properly handles volume datasets: 
-
+```sh
 public class sampleTestMethodCls {
 
 	static testMethod void testAccountTrigger(){
@@ -254,6 +266,7 @@ public class sampleTestMethodCls {
 		insert contactsToCreate;
 		Test.stopTest();	
 	}}
+``` 
 
 This test method creates an array of 200 contacts and inserts them. The insert will, in turn, cause the trigger to fire. When this test method is executed, a System.Exception will be thrown when it hits a governor limit. Since the trigger shown above executes a SOQL query for each contact in the batch, this test method throws the exception 'Too many SOQL queries: 101'. A trigger can only execute at most 20 queries. 
 
@@ -282,6 +295,7 @@ Note how the SOQL query retrieving the accounts is now done once only. If you re
 When deploying Apex code between sandbox and production environments, or installing Force.com AppExchange packages, it is essential to avoid hardcoding IDs in the Apex code. By doing so, if the record IDs change between environments, the logic can dynamically identify the proper data to operate against and not fail. 
 Here is a hard coded sample of the record type IDs that are used in an conditional statement. This will work fine in the specific environment in which the code was developed, but if this code were to be installed in a separate org (ie. as part of an AppExchange package), there is no guarantee that the record type identifiers will be the same. 
 
+```sh
 for(Account a: Trigger.new){	 
    //Error - hardcoded the record type id
    if(a.RecordTypeId=='012500000009WAr'){     	  	
@@ -290,10 +304,11 @@ for(Account a: Trigger.new){
       //do some logic here for a different record type...
    }
 }
+```
 
 Now, to properly handle the dynamic nature of the record type IDs, the following example queries for the record types in the code, stores the dataset in a map collection for easy retrieval, and ultimately avoids any hard coding. 
 
-
+```sh
     //Query for the Account record types
      List<RecordType> rtypes = [Select Name, Id From RecordType 
                   where sObjectType='Account' and isActive=true];
@@ -312,5 +327,6 @@ Now, to properly handle the dynamic nature of the record type IDs, the following
      	  	 //do some logic here for a different record type...
      	  }   	 
      }
+```
 
 By ensuring no IDs are stored in the Apex code, you are making the code much more dynamic and flexible - and ensuring that it can be deployed safely to different environments
