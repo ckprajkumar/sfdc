@@ -209,18 +209,18 @@ Instead, the @future method should be invoked with a batch of records so that it
 
 And now the @future method is designed to receive a set of records:
 ```sh
-    global class asyncApex {
+global class asyncApex {
  
-     @future 
-       public static void processAccount(Set<Id> accountIds) {
-       List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact where accountId IN :accountIds];
-       for(Contact c: contacts){
- 	   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' + c.lastname +']');
- 	   c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
-       }
-       update contacts;
-     }
-    }
+ @future 
+ public static void processAccount(Set<Id> accountIds) {
+ List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact where accountId IN :accountIds];
+ for(Contact c: contacts){
+   System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' + c.lastname +']');
+   c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
+   }
+ update contacts;
+ }
+}
 ```
 
 Notice the minor changes to the code to handle a batch of records. It doesn't take a whole lot of code to handle a set of records as compared to a single record, but it's a critical design principle that should persist across all of your Apex code - regardless if it's executing synchronously or asynchronously. 
@@ -234,38 +234,36 @@ The example below shows you a poorly written trigger that does not handle bulk p
 Here is the poorly written contact trigger. For each contact, the trigger performs a SOQL query to retrieve the related account. The invalid part of this trigger is that the SOQL query is within the for loop and therefore will throw a governor limit exception if more than 100 contacts are inserted/updated. 
 ```sh
 {  
-   for(Contact ct: Trigger.new){	
-   	   Account acct = [select id, name from Account where Id=:ct.AccountId];
-   	   if(acct.BillingState=='CA'){
-   	      System.debug('found a contact related to an account in california...');
-   	      ct.email = 'test_email@testing.com';
-   	      //Apply more logic here....
-   	   }
-   } 
+for(Contact ct: Trigger.new){	
+Account acct = [select id, name from Account where Id=:ct.AccountId];
+if(acct.BillingState=='CA'){
+ System.debug('found a contact related to an account in california...');
+ct.email = 'test_email@testing.com';
+//Apply more logic here....
+}
+} 
 }
 ```
 
 Here is the test method that tests if this trigger properly handles volume datasets: 
 ```sh
 public class sampleTestMethodCls {
-
-	static testMethod void testAccountTrigger(){
+static testMethod void testAccountTrigger(){
 		
-		//First, prepare 200 contacts for the test data
-		Account acct = new Account(name='test account');
-		insert acct;
+//First, prepare 200 contacts for the test data
+Account acct = new Account(name='test account');
+insert acct;	
+Contact[] contactsToCreate = new Contact[]{};
+for(Integer x=0; x<200;x++){
+Contact ct = new Contact(AccountId=acct.Id,lastname='test');
+contactsToCreate.add(ct);
+}
 		
-		Contact[] contactsToCreate = new Contact[]{};
-		for(Integer x=0; x<200;x++){
-		    Contact ct = new Contact(AccountId=acct.Id,lastname='test');
-		    contactsToCreate.add(ct);
-		}
-		
-		//Now insert data causing an contact trigger to fire. 
-		Test.startTest();
-		insert contactsToCreate;
-		Test.stopTest();	
-	}}
+//Now insert data causing an contact trigger to fire. 
+Test.startTest();
+insert contactsToCreate;
+Test.stopTest();	
+}}
 ``` 
 
 This test method creates an array of 200 contacts and inserts them. The insert will, in turn, cause the trigger to fire. When this test method is executed, a System.Exception will be thrown when it hits a governor limit. Since the trigger shown above executes a SOQL query for each contact in the batch, this test method throws the exception 'Too many SOQL queries: 101'. A trigger can only execute at most 20 queries. 
@@ -274,19 +272,19 @@ Now let's correct the trigger to properly handle bulk operations. The key to fix
 
 ```sh
 {
-   Set<Id> accountIds = new Set<Id>();
-   for(Contact ct: Trigger.new)
-   	   accountIds.add(ct.AccountId);
-   //Do SOQL Query	   
-   Map<Id, Account> accounts = new Map<Id, Account>(
-        [select id, name, billingState from Account where id in :accountIds]); 
-   for(Contact ct: Trigger.new){
-       if(accounts.get(ct.AccountId).BillingState=='CA'){
-   	   	   System.debug('found a contact related to an account in california...');
-   	   	   ct.email = 'test_email@testing.com';
-   	   	   //Apply more logic here....
-   	   }
-   } 
+Set<Id> accountIds = new Set<Id>();
+for(Contact ct: Trigger.new)
+accountIds.add(ct.AccountId);
+//Do SOQL Query	   
+Map<Id, Account> accounts = new Map<Id, Account>(
+[select id, name, billingState from Account where id in :accountIds]); 
+for(Contact ct: Trigger.new){
+if(accounts.get(ct.AccountId).BillingState=='CA'){
+System.debug('found a contact related to an account in california...');
+ct.email = 'test_email@testing.com';
+//Apply more logic here....
+}
+} 
 }
 ```
 Note how the SOQL query retrieving the accounts is now done once only. If you re-run the test method shown above, it will now execute successfully with no errors and 100% code coverage.
@@ -297,36 +295,34 @@ Here is a hard coded sample of the record type IDs that are used in an condition
 
 ```sh
 for(Account a: Trigger.new){	 
-   //Error - hardcoded the record type id
-   if(a.RecordTypeId=='012500000009WAr'){     	  	
-      //do some logic here.....
-   }else if(a.RecordTypeId=='0123000000095Km'){
-      //do some logic here for a different record type...
-   }
+//Error - hardcoded the record type id
+if(a.RecordTypeId=='012500000009WAr'){     	  	
+//do some logic here.....
+}else if(a.RecordTypeId=='0123000000095Km'){
+//do some logic here for a different record type...
+}
 }
 ```
 
 Now, to properly handle the dynamic nature of the record type IDs, the following example queries for the record types in the code, stores the dataset in a map collection for easy retrieval, and ultimately avoids any hard coding. 
 
 ```sh
-    //Query for the Account record types
-     List<RecordType> rtypes = [Select Name, Id From RecordType 
-                  where sObjectType='Account' and isActive=true];
-                  //Create a map between the Record Type Name and Id for easy retrieval
-     Map<String,String> accountRecordTypes = new Map<String,String>{};
-     for(RecordType rt: rtypes)
-        accountRecordTypes.put(rt.Name,rt.Id);
-   
-      for(Account a: Trigger.new){
-     	 
-     	  //Use the Map collection to dynamically retrieve the Record Type Id
-     	  //Avoid hardcoding Ids in the Apex code
-     	  if(a.RecordTypeId==accountRecordTypes.get('Healthcare')){     	  	
-     	  	 //do some logic here.....
-     	  }else if(a.RecordTypeId==accountRecordTypes.get('High Tech')){
-     	  	 //do some logic here for a different record type...
-     	  }   	 
-     }
+//Query for the Account record types
+List<RecordType> rtypes = [Select Name, Id From RecordType 
+where sObjectType='Account' and isActive=true];
+//Create a map between the Record Type Name and Id for easy retrieval
+Map<String,String> accountRecordTypes = new Map<String,String>{};
+for(RecordType rt: rtypes)
+accountRecordTypes.put(rt.Name,rt.Id);  
+for(Account a: Trigger.new){    	 
+//Use the Map collection to dynamically retrieve the Record Type Id
+//Avoid hardcoding Ids in the Apex code
+if(a.RecordTypeId==accountRecordTypes.get('Healthcare')){     	  	
+//do some logic here.....
+}else if(a.RecordTypeId==accountRecordTypes.get('High Tech')){
+//do some logic here for a different record type...
+}   	 
+}
 ```
 
 By ensuring no IDs are stored in the Apex code, you are making the code much more dynamic and flexible - and ensuring that it can be deployed safely to different environments
