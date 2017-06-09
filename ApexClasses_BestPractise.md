@@ -213,7 +213,8 @@ global class asyncApex {
  
  @future 
  public static void processAccount(Set<Id> accountIds) {
- List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact where accountId IN :accountIds];
+ List<Contact> contacts = [select id, salutation, firstname, lastname, email from Contact 
+ 								where accountId IN :accountIds];
  for(Contact c: contacts){
    System.debug('Contact Id[' + c.Id + '], FirstName[' + c.firstname + '], LastName[' + c.lastname +']');
    c.Description=c.salutation + ' ' + c.firstName + ' ' + c.lastname;
