@@ -48,7 +48,7 @@ String address, street, city;
 Incorrect:
 ```sh
 String address , street , city;
--	String address,street,city;
+String address,street,city;
 ```
 
 - There should a space SFAter every end-parenthesis ((), and there should NOT be a space before start parenthesis ()).
