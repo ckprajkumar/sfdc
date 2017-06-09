@@ -1,5 +1,5 @@
 # Code Convention
-### General Standards
+## General Standards
 
 - Declare all variables at the beginning of each class. 
 - All instance variables must be declared either private or protected. 
@@ -20,7 +20,7 @@
 - Use sets, maps, or lists when returning data from the database. This makes your code more efficient because the code makes fewer trips to the database. Avoid writing a SOQL inside a loop. 
 - All classes that contain methods or variables defined with the webService keyword must be declared as global. If a method, variable or inner class is declared as global, the outer, top-level class must also be defined as global.
 
-### Comments
+## Comments
 
 Comments in code are important because they allow other developers to quickly comprehend the logic and intent of unfamiliar code. Avoid sentence fragments. Start sentences with a properly capitalized word, and end them with punctuation.
 
@@ -54,9 +54,44 @@ Very short comments can appear on the same line as the code they describe.
 if (a == 2) {
 return TRUE;  // special case	
 }	else {	
-}	return isPrime(a); // works only for odd a	
+return isPrime(a); // works only for odd a	
+}
 ```
 
+### 6.2.1.	Apex
+```sh
+int i = 1; // This comment is ignored by the parser
 
+int i = 1; /* This comment can wrap over multiple lines without getting 
+                      interpreted by the parser. */
+```
+
+### 6.2.2.	VisualForce
+```sh
+<apex:page standardController="Contact">   <!-- Here is a comment -->
+ <apex:sectionHeader title="Contact Edit" subtitle="New SFDC99 Member"
+/>
+```
+
+### 6.2.3.	Javascript
+```sh
+/**
+
+*	Returns an object as a JSON string 
+
+*	
+*	@method toJSON 
+*	@return {Object} Copy of ... 
+*/
+```
+
+### 6.2.4.	CSS
+```sh
+{
+color: red;
+/* This is a single-line comment */ text-align: center;
+}
+/* This is a multi-line comment */
+```
 
 
