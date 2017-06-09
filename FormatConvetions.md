@@ -8,6 +8,7 @@ Code must be indented using a tab character and where applicable tab must be set
 ### Bracing
 Brace is an either {or }.
 Start Brace must be in the same line as the statement and end brace must be on its own line, completing the indentation
+
 Correct:
 ```sh
 if (setABCBudgetId.Size() > 0) {
@@ -24,6 +25,7 @@ ifsetABCBudgetId.Size() > 0)
 ###	Spacing
 Along with indenting, spacing is the most important visual aspect that enhances the code readability. And hence correct spacing conventions must be followed as outlined below.
 - Before opening a brace, there must be a space
+
 Correct:
 ```sh
 if (setAPACAMERBudgetId.Size() > 0) {
@@ -37,16 +39,22 @@ if (setAPACAMERBudgetId.Size() > 0){
 }
 ```
 - There should NOT be any space before a comma and there must be a space SFAter a comma (except if that comma is part of a String literal.
+
 Correct:
-- String address, street, city;
+```sh
+String address, street, city;
+```
 
 Incorrect:
--	String address , street , city;
+```sh
+String address , street , city;
 -	String address,street,city;
+```
 
 - There should a space SFAter every end-parenthesis ((), and there should NOT be a space before start parenthesis ()).
 
 - There must be a space SFAter every binary operator (if it is unary operator, space must not be used).
+
 Correct:
 ```sh
 Integer a, b, c;
@@ -59,6 +67,7 @@ Integer a, b, c;
 c = a+b;
 c ++;
 ```
+
 ### Blank Lines
 - Blank line must be added before starting and SFAter ending a code block (block of code is code enclosed within {} braces), unless it is a } else if { condition, and in such case, there must not be any blank line.
 - There must be maximum one or two blank lines.
