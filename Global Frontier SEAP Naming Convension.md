@@ -9,7 +9,7 @@ This will help in identifying what belongs to specific application and helps in 
 |GF_CalculateEstimate_BL | GF_<classname>_<Type> | GF_CalculateEstimate_BL |
 |GF_CalculatEestimate_VFC|GF_<classname>_VFC|GF_CalculatEestimate_VFC|
 |GF_CalculatEestimate_VFC_Test|GF_<classnametobetested>_<VFC>_Test|GF_CalculatEestimate_VFC_Test|
-|GF_LC_CalculateEstimate|GF_LC_<lightningcomponent>|GF_LC_CalculatEestimate|
+|GF_LC_CalculateEstimate|GF_LC_<lightningcomponentbundle>|GF_LC_CalculatEestimate|
 |GF_LA_CalculateEstimate|GF_LA_<lightningapplication>|GF_LA_CalculatEestimate|
 |GF_LE_CalculateEstimate|GF_LCE_<lightningcomponentevent>|GF_LCE_CalculatEestimate|
 |GF_LE_CalculateEstimate|GF_LAE_<lightningapplicationevent>|GF_LAE_CalculatEestimate|
