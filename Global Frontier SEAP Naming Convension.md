@@ -11,7 +11,8 @@ This will help in identifying what belongs to specific application and helps in 
 |GF_CalculatEestimate_VFC_Test|GF_<classnametobetested>_<VFC>_Test|GF_CalculatEestimate_VFC_Test|
 |GF_LC_CalculateEstimate|GF_LC_<lightningcomponent>|GF_LC_CalculatEestimate|
 |GF_LA_CalculateEstimate|GF_LA_<lightningapplication>|GF_LA_CalculatEestimate|
-|GF_LE_CalculateEstimate|GF_LE_<lightningevent>|GF_LE_CalculatEestimate|
+|GF_LE_CalculateEstimate|GF_LCE_<lightningcomponentevent>|GF_LCE_CalculatEestimate|
+|GF_LE_CalculateEstimate|GF_LAE_<lightningapplicationevent>|GF_LAE_CalculatEestimate|
 |GF_CalculateEstimate_VFP|GF_<pagename>_VFP|GF_CalculateEstimate_VFP|
 |GF_BrandEstimate_Trigger|GF_<objectname>_Trigger|GF_BrandEstimate_Trigger|
 |GF_calculatebrand_ Batch|GF_<batchname>_Batch|GF_calculatebrand_ Batch|
