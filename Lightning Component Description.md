@@ -8,7 +8,7 @@ c. Application Scalability
 a. Application Complexity
 b. Time to Delivery
 c. Overall Cost
-#### Lightning Component Bundle
+### Lightning Component Bundle
 Each Lightning Component is made up of a markup, JavaScript controller, a Helper, a Renderer 
 and more (Component Bundle).
 
