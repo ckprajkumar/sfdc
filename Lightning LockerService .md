@@ -10,7 +10,7 @@ Third-party libraries usually fall in one of the following categories:
 - UI libraries (Bootstrap, jQuery UI, etc)
 - Data visualization libraries (D3, Chart.js, Leaflet, etc)
 - MVC frameworks (React, Angular, etc)
-##### DOM Manipulation Libraries
+#### DOM Manipulation Libraries
 Using jQuery, you would:
 - Assign a unique id to the input element
 - Use a jQuery selector to find the input element in the DOM
@@ -27,7 +27,7 @@ Using the Lightning Component Framework, you would:
 
 - When compare to jQuery, lightning component framework is more secured.
 
-##### MVC Frameworks
+#### MVC Frameworks
 - At a high level, libraries like React and AngularJS have the same focus as the Lightning Component Framework.
 - They provide code organization and utilities to create components. 
 - If you are looking for a component framework to develop applications on the Salesforce platform, you should use the Lightning Component Framework because it’s tightly integrated with the platform. 
