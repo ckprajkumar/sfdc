@@ -27,4 +27,17 @@ Using the Lightning Component Framework, you would:
 
 - When compare to jQuery, lightning component framework is more secured.
 
+##### MVC Frameworks
+- At a high level, libraries like React and AngularJS have the same focus as the Lightning Component Framework.
+- They provide code organization and utilities to create components. 
+- If you are looking for a component framework to develop applications on the Salesforce platform, you should use the Lightning Component Framework because it’s tightly integrated with the platform. 
+- But you can also use other frameworks if you so desire. 
+- All you have to do is choose the isolation mechanism.
+
+### LockerService enforces a series of rules to further avoid security exploits:
+- JavaScript ES5 strict mode is automatically enabled. 
+- Libraries that do not support strict mode will not work with LockerService.
+- Content Security Policy (CSP), unsafe-eval and unsafe-inline are disallowed. 
+- Libraries using eval() or inline JavaScript code execution will not work with LockerService.
+
 
