@@ -16,4 +16,11 @@ Using jQuery, you would:
 - Use a jQuery selector to find the input element in the DOM
 - Assign the value to that DOM element
 
+[Image]
+
+Using the Lightning Component Framework, you would:
+- Declare a score attribute
+- Bind the input field to the score attribute
+- Set the value of the score attribute: the bound input field will automatically display the new value.
+
 
