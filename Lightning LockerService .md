@@ -23,4 +23,8 @@ Using the Lightning Component Framework, you would:
 - Bind the input field to the score attribute
 - Set the value of the score attribute: the bound input field will automatically display the new value.
 
+[Image]
+
+- When compare to jQuery, lightning component framework is more secured.
+
 
