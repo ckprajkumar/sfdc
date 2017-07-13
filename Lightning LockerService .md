@@ -18,10 +18,10 @@ Third-party libraries usually fall in one of the following categories:
 
 [Image]
 
-        Using the Lightning Component Framework, you would:
-            - Declare a score attribute.
-            - Bind the input field to the score attribute.
-            - Set the value of the score attribute: The bound input field will automatically display the new value.
+ Using the Lightning Component Framework, you would:
+- Declare a score attribute.
+- Bind the input field to the score attribute.
+- Set the value of the score attribute: The bound input field will automatically display the new value.
 
 [Image]
 
