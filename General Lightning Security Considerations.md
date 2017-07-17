@@ -12,8 +12,8 @@
 - For loading script or style resources, use the ltng:require component rather than including the resource via a script or link tag.
 - Avoid inline JavaScript except when referencing JavaScript controller methods in the component markup.
 
-* <div onmouseover="myfunction" >foo</div>    //bad
-* <div onmouseover="{!c.myControllerFunction}" >foo</div>    //ok
+##### <div onmouseover="myfunction" >foo</div>    //bad
+##### <div onmouseover="{!c.myControllerFunction}" >foo</div>    //ok
 
 ### Sharing in Apex Classes
     public class ExpenseController() {    //unsafe
