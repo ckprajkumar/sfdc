@@ -78,8 +78,6 @@ An external CSS resource that you’ve uploaded as a static resource, use a <ltn
 Loading Sets of CSS
 > Specify a comma-separated list of resources in the styles attribute to load a set of CSS.
 
-````sh
-   style="{!join(',',
-    	$Resource.myStyles+'/stylesheetOne.css',
-  	    $Resource.myStyles+'/moreStyles.css')}"
-  	    ```
+```sh
+style="{!join(',',$Resource.myStyles+'/stylesheetOne.css',$Resource.myStyles+'/moreStyles.css')}"
+```
