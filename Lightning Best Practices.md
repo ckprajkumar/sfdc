@@ -43,7 +43,7 @@ doInit : function(component, event, helper)
 		action.setCallback(this, function(response){
             var result = response.getReturnValue();
         });
-	}
+    }
 ```
 ### Lazy instantiation in your own components
 *	You can use ```<aura:if>``` to lazily instantiate parts of the UI (see conditional rendering section).
@@ -58,3 +58,28 @@ or
 ```sh
 <div class="{!v.isError?null:'slds-hide'}">{!v.errorMessage}</div>
 ```
+The ```<div>``` component and all of its children are created and rendered up front, but they’re hidden. If there are event listeners attached to the ```<div>``` or any of its children, these event listeners would be “live.”
+#### Conditionally creating elements using ```<aura:if>```
+```sh
+    <aura:if isTrue="{!v.isError}">
+        <div>{!v.errorMessage}</div>
+    </aura:if>
+```
+*	The ```<div>``` component and all its children are only created if the value of the isTrue expression evaluates to true
+*	All the components inside the ```<aura:if>``` tag are destroyed if the value of the isTrue expression changes and evaluates to false. They’re re-created the next time the value of the isTrue expression changes again and evaluates to true.
+
+The ```<aura:if>``` approach because it helps your components load faster.
+The ```<aura:renderIf>``` approach is deprecated and shouldn’t be used
+### Using $Resource in Component Markup
+An external CSS resource that you’ve uploaded as a static resource, use a <ltng:require> tag in your .cmp or .app markup.
+```sh 
+<ltng:require styles="{!Resource.resourceName}"/>
+```
+Loading Sets of CSS
+> Specify a comma-separated list of resources in the styles attribute to load a set of CSS.
+
+````sh
+   style="{!join(',',
+    	$Resource.myStyles+'/stylesheetOne.css',
+  	    $Resource.myStyles+'/moreStyles.css')}"
+  	    ```
