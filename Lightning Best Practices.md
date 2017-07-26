@@ -81,3 +81,40 @@ Loading Sets of CSS
 ```sh
 style="{!join(',',$Resource.myStyles+'/stylesheetOne.css',$Resource.myStyles+'/moreStyles.css')}"
 ```
+#### Do's
+```sh
+<ltng:require scripts="{!join(','
+                 $Resource.myResources+'/scripts/js1.js'},
+    			 $Resource.myResources+'/scripts/js2.js'}" afterScriptsLoaded="{!c.setup}"/>
+```
+#### Do Not
+```sh
+<ltng:require style="/resource/myResources/styles/styles.css"
+    scripts="/resource/myResources/scripts/js1.js,/resource/myResources/scripts/js2.js"             afterScriptsLoaded="{!c.setup}"/>
+```
+### Call multiple helper methods
+#### Do’s
+ Controller.js
+ ```sh
+ doInit : function(component, event, helper) 
+    {
+        helper.method1(component);
+        helper.method2(component);
+        helper.mwthod3(component);
+    }
+```
+Helper.js
+```sh
+ ({
+        method1:function(component){
+        	//do some stuff
+        },
+ 		method2:function(component){
+        	//do some stuff
+        },
+        method3:function(component){
+        	//do some stuff
+        }    	
+	})
+```
+
