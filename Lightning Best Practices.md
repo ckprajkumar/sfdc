@@ -33,6 +33,7 @@ doInit : function(component, event, helper)
 	}
 ```
 #### Do Not
+```sh
 doInit : function(component, event, helper) 
     {
 		var action = component.get("c.serverEcho");
@@ -43,8 +44,17 @@ doInit : function(component, event, helper)
             var result = response.getReturnValue();
         });
 	}
+```
 ### Lazy instantiation in your own components
 *	You can use ```<aura:if>``` to lazily instantiate parts of the UI (see conditional rendering section).
 *	Some components (like ```<lightning:tabset>``` and ```<lightning:tab>```) support lazy instantiation by default.
 *	You can also instantiate components programmatically using  ```$A.createComponent();``` however, that approach is generally harder to code, maintain, and debug.
-
+#### Toggling visibility using CSS
+```sh
+ <div aura:id="error" class="slds-hide">{!v.errorMessage}</div>
+    component.find("error").toggleClass(!isError,"slds-hide");
+```
+or
+```sh
+<div class="{!v.isError?null:'slds-hide'}">{!v.errorMessage}</div>
+```
