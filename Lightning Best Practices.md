@@ -25,12 +25,26 @@ doInit : function(component, event, helper)
 		action.setParams({ 
             firstName : component.get("v.firstName") 
         });
-		action.setCallback(this, function(response) 
-        {
+		action.setCallback(this, function(response){
             var result = response.getReturnValue();
         });
         // $A.enqueueAction adds the server-side action to the queue.
 		$A.enqueueAction(action);
 	}
 ```
+#### Do Not
+doInit : function(component, event, helper) 
+    {
+		var action = component.get("c.serverEcho");
+		action.setParams({ 
+            firstName : component.get("v.firstName") 
+        });
+		action.setCallback(this, function(response){
+            var result = response.getReturnValue();
+        });
+	}
+### Lazy instantiation in your own components
+*	You can use ```<aura:if>``` to lazily instantiate parts of the UI (see conditional rendering section).
+*	Some components (like ```<lightning:tabset>``` and ```<lightning:tab>```) support lazy instantiation by default.
+*	You can also instantiate components programmatically using  ```$A.createComponent();``` however, that approach is generally harder to code, maintain, and debug.
 
