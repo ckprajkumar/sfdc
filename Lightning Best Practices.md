@@ -122,8 +122,7 @@ Helper.js
         method1:function(component){
         	var action = component.get("c.callingmethod1");
     		var self = this;
-    		action.setcallback(this,function(resp))
-    		{
+    		action.setcallback(this,function(resp)){
 				//do some stuff and call method1
 				self.method1(component);    
 			});
@@ -132,8 +131,7 @@ Helper.js
  		method2:function(component){
         	var action = component.get("c.callingmethod2");
     		var self = this;
-    		action.setcallback(this,function(resp))
-    		{
+    		action.setcallback(this,function(resp)){
 				//do some stuff and call method1
 				self.method2(component);    
 			});
@@ -142,8 +140,7 @@ Helper.js
         method3:function(component){
         	var action = component.get("c.callingmethod3");
     		var self = this;
-    		action.setcallback(this,function(resp))
-    		{
+    		action.setcallback(this,function(resp)){
 				//do some stuff and call method1
 				self.method3(component);    
 			});
