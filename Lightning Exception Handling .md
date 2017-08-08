@@ -125,7 +125,7 @@ This sample shows you the basics of throwing and catching a recoverable error in
 </aura:component>
 ```
 Here is the client-side controller source.
-**recoverableErrorController.js**
+***recoverableErrorController.js***
 ```sh
 ({
     throwErrorForKicks: function(cmp) {
