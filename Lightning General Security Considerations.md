@@ -2,10 +2,9 @@
 - When developing Lightning apps, make sure to enable LockerService in your Developer Edition org.
 ### Content Security Policy for Lightning Components
 - Lightning components are currently subject to a Content Security Policy (CSP) with the following directives. See CSP Directives for more information.
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture9.png?raw=true)
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture10.png?raw=true)
 
-[image]
-
-[image]
 
 ### Additional Restrictions for JavaScript in Lightning Components
 - To change styles dynamically, use $A.util.toggleClass(). Dynamic operations such as fade in and fade out are discouraged in components. If you require them, use CSS animations.
