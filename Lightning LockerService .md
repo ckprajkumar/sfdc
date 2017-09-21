@@ -15,18 +15,11 @@ Using jQuery, you would:
 - Assign a unique id to the input element.
 - Use a jQuery selector to find the input element in the DOM.
 - Assign the value to that DOM element.
-
-[Image]
-
 Using the Lightning Component Framework, you would:
 - Declare a score attribute.
 - Bind the input field to the score attribute.
 - Set the value of the score attribute: The bound input field will automatically display the new value.
-
-[Image]
-
 - When compare to jQuery, lightning component framework is more secured.
-
 #### MVC Frameworks
 - At a high level, libraries like React and AngularJS have the same focus as the Lightning Component Framework.
 - They provide code organization and utilities to create components. 
