@@ -12,7 +12,7 @@ c. Overall Cost
 Each Lightning Component is made up of a markup, JavaScript controller, a Helper, a Renderer 
 and more (Component Bundle).
 
-[Image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture3.png?raw=true)
 
 #### Controller
 *	Use Controllers to listen to user events and other events like Component Event, Application Event.
@@ -24,7 +24,7 @@ Always write your business logic in helper functions because
 *	Helper functions may be called from any other java-script in the component bundle.
 *	Whenever a component runs Lightning Framework creates an instance of the Controller, an instance of the Renderer for each component but creates only one copy of the Helper and passes the reference of the Helper into every Controller instance and every Renderer instance. Below picture will make you understand this well.
 
-[Image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture4.png?raw=true)
 
 #### Renderer
 *	Use Renderer whenever you want to customize default rendering, rerendering, afterrendering and unrendering behavior for a component.
@@ -35,5 +35,5 @@ Always write your business logic in helper functions because
 *	Always try to use a component event instead of an application event, if possible. Component events can only be handled by components above them in the containment hierarchy so their usage is more localized to the components that need to know about them. Below picture will make you understand better about component event.
 *	Application events are best used for something that should be handled at the application level, such as navigating to a specific record.
 
-[Image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture5.png?raw=true)
 
