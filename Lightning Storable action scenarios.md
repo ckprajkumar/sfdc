@@ -1,5 +1,5 @@
 ### Scenario 1: The response is not available in the cache (or has expired)
-[Image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture6.png?raw=true)
 * The component calls a server method
 * The framework checks if the response is available in the cache
 * The response isn’t available in the cache or is expired (cached response age > expiration age)
@@ -8,13 +8,13 @@
 * The framework caches the response
 * The framework calls the action callback function providing the server response
 ### Scenario 2: The response is available in the cache and doesn’t need to be refreshed
-[image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture7.png?raw=true)
 * The component calls a server method
 * The framework checks if the response is available in the cache
 * The response is available, and doesn’t need to be refreshed (cached response age <= refresh age)
 * The framework calls the action callback function, providing the cached response
 ### Scenario 3: The response is available in the cache and needs to be refreshed
-[image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture8.png?raw=true)
 * The component calls a server method
 * The framework checks if the response is available in the cache
 * The response is available in the cache and needs to be refreshed (cached response age > refresh age)
