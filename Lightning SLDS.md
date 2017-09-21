@@ -50,8 +50,8 @@ The Salesforce Lightning Design System (SLDS) component library is actively deve
 <button type="button">Click Me!</button> 
 ```
 ### Drop Down
-	[Menus - https://www.lightningdesignsystem.com/components/menus/]
-	[Picklist - https://www.lightningdesignsystem.com/components/picklist/
+	Menus - https://www.lightningdesignsystem.com/components/menus/
+	Picklist - https://www.lightningdesignsystem.com/components/picklist/
 ### Lookups
 	https://www.lightningdesignsystem.com/components/lookups/
 ### Trees
