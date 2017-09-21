@@ -43,7 +43,7 @@ The Salesforce Lightning Design System (SLDS) component library is actively deve
 ```sh
 <button class="slds-button slds-button_success">Button</button>
 ```
-[Image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture11%20.png?raw=true)
 
 #### Without SLDS 
 ```sh
