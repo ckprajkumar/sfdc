@@ -7,7 +7,8 @@ Lightning is the collection of tools and technologies behind a significant upgra
 *	Experience: A set of modern user interfaces optimized for speed. This includes the Lightning Experience, Salesforce1 Mobile app and template-based communities.
 *	Lightning Design System: Style guides and modern enterprise UX best practices to build pixel perfect apps that match the look and feel of the Lightning Experience and Salesforce1 Mobile app.
 
-[image]
+![ScreenShot](https://github.com/ckprajkumar/sfdc/blob/master/Picture%202.png?raw=true)
+
 *	A special Application component which acts as an outermost container, which can be launched outside the context of the Salesforce1 app.
 *	Peer components nested in the application component container.
 *	The ability to nest components inside other components.
